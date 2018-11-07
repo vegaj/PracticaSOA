@@ -1,134 +1,125 @@
-drop table Vinietas;
-drop table Series;
+    drop table Vinietas;
+    drop table Series;
 
-create table Series (
-    id integer not null generated always as identity,
-    nombre varchar (50) not null, 
-    puntuacion integer default 0,
-    autor varchar (50) not null,
-    CONSTRAINT series_pk PRIMARY KEY (id)
-);
+    create table Series (
+        id integer not null generated always as identity,
+        nombre varchar (50) not null, 
+        puntuacion integer default 0,
+        autor varchar (50) not null,
+        CONSTRAINT series_pk PRIMARY KEY (id)
+    );
 
+    create table Vinietas (
+        idserie integer not null,
+        id integer not null generated always as identity (START WITH 1, INCREMENT BY 1),
+        nombre varchar(50) not null,
+        fecha date default CURRENT_DATE,
+        CONSTRAINT vinietas_pk PRIMARY KEY (id),
+        FOREIGN KEY (idserie) REFERENCES series(id) ON DELETE CASCADE
+    );
 
-INSERT INTO SERIES (nombre, puntuacion, autor)VALUES ('Serie2', 1, 'Pepe');
-INSERT INTO SERIES (nombre, puntuacion, autor)VALUES ('Serie3', 2, 'Pepe');
-INSERT INTO SERIES (nombre, puntuacion, autor)VALUES ('Serie4', 3, 'Pepe');
-INSERT INTO SERIES (nombre, puntuacion, autor)VALUES ('Serie5', 4, 'Pepe');
-INSERT INTO SERIES (nombre, puntuacion, autor)VALUES ('Serie6', 5, 'Pepe');
-INSERT INTO SERIES (nombre, puntuacion, autor)VALUES ('Serie7', -7, 'Pepe');
+    INSERT INTO SERIES (nombre, puntuacion, autor)VALUES ('La familia Trapisonda', 5, 'Ibañez');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-0', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='La familia Trapisonda'), '1.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-1', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='La familia Trapisonda'), '2.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-2', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='La familia Trapisonda'), '3.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-3', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='La familia Trapisonda'), '4.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-4', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='La familia Trapisonda'), '5.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-5', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='La familia Trapisonda'), '6.10.1980');
 
+    INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('Mortadelo y Filemon', 9, 'Ibañez');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-1', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '7.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-2', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '8.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-3', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '9.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-4', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '10.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-5', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '11.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-6', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '12.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-7', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '13.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-8', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '14.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-9', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '15.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-10', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '16.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-11', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '17.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-12', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '18.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-13', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '19.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-14', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '20.10.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Especial navidad', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '21.10.1980');
 
-create table Vinietas (
-    idserie integer not null,
-    id integer not null generated always as identity (START WITH 1, INCREMENT BY 1),
-    nombre varchar(50) not null,
-    fecha date default CURRENT_DATE,
-    CONSTRAINT vinietas_pk PRIMARY KEY (id),
-    FOREIGN KEY (idserie) REFERENCES series(id) ON DELETE CASCADE
-);
+    INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('Rompetechos', 6, 'Ibañez');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-6', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Rompetechos'), '1.01.1990');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-9', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Rompetechos'), '1.02.1990');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-12', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Rompetechos'), '1.03.1990');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-15', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Rompetechos'), '1.04.1990');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-18', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Rompetechos'), '1.05.1990');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-21', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Rompetechos'), '1.06.1990');
 
-INSERT INTO SERIES (nombre, puntuacion, autor)VALUES ('La familia Trapisonda', 5, 'Ibañez');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-0', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='La familia Trapisonda'), '1.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-1', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='La familia Trapisonda'), '2.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-2', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='La familia Trapisonda'), '3.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-3', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='La familia Trapisonda'), '4.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-4', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='La familia Trapisonda'), '5.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-5', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='La familia Trapisonda'), '6.10.1980');
-
-INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('Mortadelo y Filemon', 9, 'Ibañez');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-1', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '7.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-2', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '8.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-3', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '9.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-4', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '10.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-5', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '11.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-6', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '12.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-7', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '13.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-8', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '14.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-9', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '15.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-10', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '16.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-11', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '17.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-12', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '18.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-13', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '19.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-14', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '20.10.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Especial navidad', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Mortadelo y Filemon'), '21.10.1980');
-
-INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('Rompetechos', 6, 'Ibañez');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-6', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Rompetechos'), '1.01.1990');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-9', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Rompetechos'), '1.02.1990');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-12', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Rompetechos'), '1.03.1990');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-15', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Rompetechos'), '1.04.1990');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-18', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Rompetechos'), '1.05.1990');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Entrega-21', (SELECT id FROM SERIES WHERE AUTOR = 'Ibañez'AND NOMBRE ='Rompetechos'), '1.06.1990');
-
-INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('Los cuatro fantasticos', 6, 'Marvel');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No-0', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Los cuatro fantasticos'), '1.06.2004');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No-1', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Los cuatro fantasticos'), '1.07.2004');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No-2', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Los cuatro fantasticos'), '1.08.2004');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No-3', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Los cuatro fantasticos'), '1.09.2004');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No-4', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Los cuatro fantasticos'), '1.10.2004');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No-5', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Los cuatro fantasticos'), '1.11.2004');
+    INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('Los cuatro fantasticos', 6, 'Marvel');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No-0', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Los cuatro fantasticos'), '1.06.2004');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No-1', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Los cuatro fantasticos'), '1.07.2004');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No-2', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Los cuatro fantasticos'), '1.08.2004');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No-3', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Los cuatro fantasticos'), '1.09.2004');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No-4', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Los cuatro fantasticos'), '1.10.2004');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No-5', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Los cuatro fantasticos'), '1.11.2004');
 
 
-INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('El asombroso Spiderman', 10, 'Marvel');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-1', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1980');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-2', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1981');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-3', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1982');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-4', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1983');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-5', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1984');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-6', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1985');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-7', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1986');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-8', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1987');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-9', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1988');
+    INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('El asombroso Spiderman', 10, 'Marvel');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-1', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1980');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-2', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1981');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-3', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1982');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-4', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1983');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-5', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1984');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-6', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1985');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-7', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1986');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-8', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1987');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('#-9', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El asombroso Spiderman'), '01.12.1988');
 
-INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('El espectacular Spiderman', 8, 'Marvel');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.10', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1989');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.11', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1990');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.12', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1991');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.13', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1992');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.14', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1993');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.15', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1994');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.16', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1995');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.17', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1996');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.18', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1997');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.19', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1998');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.20', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1999');
-
-
-INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('Civil War', 6, 'Marvel');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Edicion original', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Civil War'), '01.02.1985');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Edicion remasterizada', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Civil War'), '01.02.2014');
-/* Current date */
-INSERT INTO VINIETAS (nombre, idserie) VALUES ('Edicion coleccionista', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Civil War'));
-
-INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('El Spiderman que parece no dormir nunca', 3, 'Marvel');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.20', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2003');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.21', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2004');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.22', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2005');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.23', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2006');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.24', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2007');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.25', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2008');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.26', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2009');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.27', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2010');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.28', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2011');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.29', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2012');
+    INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('El espectacular Spiderman', 8, 'Marvel');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.10', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1989');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.11', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1990');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.12', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1991');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.13', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1992');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.14', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1993');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.15', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1994');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.16', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1995');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.17', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1996');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.18', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1997');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.19', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1998');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.20', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El espectacular Spiderman'), '01.12.1999');
 
 
-INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('Fiestas alrededor del mundo', 5, 'Sabias que');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Navidad', (SELECT id FROM SERIES WHERE AUTOR = 'Sabias que' AND NOMBRE ='Fiestas alrededor del mundo'), '27.4.2015');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Pascua', (SELECT id FROM SERIES WHERE AUTOR = 'Sabias que' AND NOMBRE ='Fiestas alrededor del mundo'), '27.4.2016');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Hanuka', (SELECT id FROM SERIES WHERE AUTOR = 'Sabias que' AND NOMBRE ='Fiestas alrededor del mundo'), '27.4.2017');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Kwanzaa', (SELECT id FROM SERIES WHERE AUTOR = 'Sabias que' AND NOMBRE ='Fiestas alrededor del mundo'), '27.4.2018');
+    INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('Civil War', 6, 'Marvel');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Edicion original', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Civil War'), '01.02.1985');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Edicion remasterizada', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Civil War'), '01.02.2014');
+    /* Current date */
+    INSERT INTO VINIETAS (nombre, idserie) VALUES ('Edicion coleccionista', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='Civil War'));
+
+    INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('El Spiderman que parece no dormir nunca', 3, 'Marvel');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.20', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2003');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.21', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2004');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.22', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2005');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.23', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2006');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.24', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2007');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.25', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2008');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.26', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2009');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.27', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2010');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.28', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2011');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('No.29', (SELECT id FROM SERIES WHERE AUTOR = 'Marvel'AND NOMBRE ='El Spiderman que parece no dormir nunca'), '13.05.2012');
 
 
-/**/
-INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('Harry Potter, el manga', 5, 'J.K. Rowling');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Harry Potter y la Piedra Filosofal', (SELECT id FROM SERIES WHERE AUTOR = 'J.K. Rowling' AND NOMBRE ='Harry Potter, el manga'), '01.09.2013');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Harry Potter y la Camara Secreta', (SELECT id FROM SERIES WHERE AUTOR = 'J.K. Rowling' AND NOMBRE ='Harry Potter, el manga'), '01.09.2014');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Harry Potter y el prisionero de Azkaban', (SELECT id FROM SERIES WHERE AUTOR = 'J.K. Rowling' AND NOMBRE ='Harry Potter, el manga'), '01.09.2015');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Harry Potter y el caliz de fuego', (SELECT id FROM SERIES WHERE AUTOR = 'J.K. Rowling' AND NOMBRE ='Harry Potter, el manga'), '01.09.2016');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Harry Potter y la Orden del Fenix', (SELECT id FROM SERIES WHERE AUTOR = 'J.K. Rowling' AND NOMBRE ='Harry Potter, el manga'), '01.09.2017');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Harry Potter y el misterio dl principe', (SELECT id FROM SERIES WHERE AUTOR = 'J.K. Rowling' AND NOMBRE ='Harry Potter, el manga'), '01.09.2018');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Harry Potter y las reliquias de la muerte', (SELECT id FROM SERIES WHERE AUTOR = 'J.K. Rowling' AND NOMBRE ='Harry Potter, el manga'), '01.09.2019');
-INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Animales fantasticos y donde encontrarlos', (SELECT id FROM SERIES WHERE AUTOR = 'J.K. Rowling' AND NOMBRE ='Harry Potter, el manga'), '01.09.2020');
+    INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('Fiestas alrededor del mundo', 5, 'Sabias que');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Navidad', (SELECT id FROM SERIES WHERE AUTOR = 'Sabias que' AND NOMBRE ='Fiestas alrededor del mundo'), '27.4.2015');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Pascua', (SELECT id FROM SERIES WHERE AUTOR = 'Sabias que' AND NOMBRE ='Fiestas alrededor del mundo'), '27.4.2016');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Hanuka', (SELECT id FROM SERIES WHERE AUTOR = 'Sabias que' AND NOMBRE ='Fiestas alrededor del mundo'), '27.4.2017');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Kwanzaa', (SELECT id FROM SERIES WHERE AUTOR = 'Sabias que' AND NOMBRE ='Fiestas alrededor del mundo'), '27.4.2018');
+
+
+    /**/
+    INSERT INTO  SERIES (nombre, puntuacion, autor) VALUES ('Harry Potter, el manga', 5, 'J.K. Rowling');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Harry Potter y la Piedra Filosofal', (SELECT id FROM SERIES WHERE AUTOR = 'J.K. Rowling' AND NOMBRE ='Harry Potter, el manga'), '01.09.2013');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Harry Potter y la Camara Secreta', (SELECT id FROM SERIES WHERE AUTOR = 'J.K. Rowling' AND NOMBRE ='Harry Potter, el manga'), '01.09.2014');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Harry Potter y el prisionero de Azkaban', (SELECT id FROM SERIES WHERE AUTOR = 'J.K. Rowling' AND NOMBRE ='Harry Potter, el manga'), '01.09.2015');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Harry Potter y el caliz de fuego', (SELECT id FROM SERIES WHERE AUTOR = 'J.K. Rowling' AND NOMBRE ='Harry Potter, el manga'), '01.09.2016');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Harry Potter y la Orden del Fenix', (SELECT id FROM SERIES WHERE AUTOR = 'J.K. Rowling' AND NOMBRE ='Harry Potter, el manga'), '01.09.2017');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Harry Potter y el misterio dl principe', (SELECT id FROM SERIES WHERE AUTOR = 'J.K. Rowling' AND NOMBRE ='Harry Potter, el manga'), '01.09.2018');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Harry Potter y las reliquias de la muerte', (SELECT id FROM SERIES WHERE AUTOR = 'J.K. Rowling' AND NOMBRE ='Harry Potter, el manga'), '01.09.2019');
+    INSERT INTO VINIETAS (nombre, idserie, fecha) VALUES ('Animales fantasticos y donde encontrarlos', (SELECT id FROM SERIES WHERE AUTOR = 'J.K. Rowling' AND NOMBRE ='Harry Potter, el manga'), '01.09.2020');
 
 
