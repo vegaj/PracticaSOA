@@ -56,7 +56,7 @@ Vamos a suponer que sabes hacerlo, por ahora.
 Si en algún momento, necesitas saber cómo se configuró el repositorio, lee este apartado, sino, clónalo.
 
 
-###Modelo de datos
+### Modelo de datos
 1. __Creamos el proyecto__: _NetBeans_ > _New Project_ > _Java EE_ > _EJB Module_. Lo hemos llamado __ServidorSOA__.
 
 2. __Ejecutamos el script__ *build_db.sql* (este script sólo funciona para bases de datos _Derby sql_). Para ello, en la pestaña de _Servicios_ usamos la conexión de Derby __iweb__ que se creó anteriormente y en ella __Ejecutamos comando__, pegamos el script y lo corremos.
@@ -94,7 +94,7 @@ _NOTA: **Entity classes from Database** se encuentra en la carpeta **persistence
   `<jta-data-source>java:app:jdbc/iweb</jta-data-source>` a
   `<jta-data-source>jdbc/iweb</jta-data-source>`
 
-###Configuración del SOA.
+### Configuración del SOA.
 
 1. En el proyecto, _New_ > _Enterprise JavaBeans_ > _Session Beans for Entity Classes_. Añadimos todas las anteriores y creamos el paquete _session_.
 
@@ -119,6 +119,6 @@ _Services_ > _GlassFish_ > _Resources_ > _JDBC_ > _JDBC Resources_.
 Hacemos click derecho en __jdbc/iweb__, propiedades y seleccionamos la pool __iwebPool__.
 
 
-_Agradecimientos_: 
+## Agradecimientos 
 * A mi familia, por haberme apoyado durante todos estos años.
 * A Álvaro, por haber dado con la solución.
