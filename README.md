@@ -111,6 +111,13 @@ Navegamos a _ServidorSOA_ > _Web Services_ > _VinietasWS_, Botón derecho en __T
 
 ![](https://rlv.zcache.com/works_on_my_machine_classic_round_sticker-r56ce1cc314be46efbe749e9c58c761d5_v9waf_8byvr_540.jpg)
 
+## Errores frecuentes
+
+### El JDBC RESOURCE utiliza una pool inválida.
+En estos casos, simplemente hay que modificar la pool que usa por la correcta.
+_Services_ > _GlassFish_ > _Resources_ > _JDBC_ > _JDBC Resources_.
+Hacemos click derecho en __jdbc/iweb__, propiedades y seleccionamos la pool __iwebPool__.
+
 
 _Agradecimientos_: 
 * A mi familia, por haberme apoyado durante todos estos años.
