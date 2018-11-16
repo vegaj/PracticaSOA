@@ -3,10 +3,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Comics</title>
     </h:head>
     <h:body>
-        Hello from Facelets
+        Series
+        
+        <h:form>
+        <h:inputText value="#{seriesBean.s.nombre}"/>
+        <h:inputText value="#{seriesBean.s.autor}"/>
+        <h:commandButton action="#{seriesBean.crear()}"/>
+        </h:form>
     </h:body>
 </html>
 
