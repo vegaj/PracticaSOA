@@ -5,6 +5,8 @@
  */
 package ws;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebService;
@@ -64,5 +66,46 @@ public class VinietasWS {
     public int count() {
         return ejbRef.count();
     }
+
+    /**
+     * Web service operation
+     * @param date to search by format YYYY-MM-DD
+     * @return the list of vinietas with that date
+     * @throws IllegalArgumentException if the date can not be resolved.
+     */
+    @WebMethod(operationName = "findByDate")
+    public List<Vinieta> findByDate(@WebParam(name = "date") final String date) throws IllegalArgumentException {
+        Date d = Date.valueOf(date);
+        return ejbRef.findByDate(d);
+    }
+
+    /**
+     * Web service operation
+     * 
+     * Dates in format YYYY-MM-DD.
+     * @param from minimum date to show. If null, then the minimum will be used.
+     * @param to max date to show. If null, then the max will be used.
+     * @return the vinietas between those dates
+     * @throws IllegalArgumentException if a date is sent and can not be resolved.
+     */
+    @WebMethod(operationName = "findBetweenDates")
+    public List<Vinieta> findBetweenDates(@WebParam(name = "from") final String from, @WebParam(name = "to") final String to) throws IllegalArgumentException{
+        
+        Date start, end;
+        if(from == null) {
+            start = Date.valueOf(LocalDate.MIN);
+        } else {
+            start = Date.valueOf(from);
+        }
+        
+        if (to == null) {
+            end = Date.valueOf(LocalDate.MAX);
+        } else {
+            end = Date.valueOf(to);
+        }
+        
+        return ejbRef.findBetweenDates(start, end);
+    }
+
     
 }
