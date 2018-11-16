@@ -67,6 +67,7 @@ public class VinietasWS {
         return ejbRef.count();
     }
 
+    
     /**
      * Web service operation
      * @param date to search by format YYYY-MM-DD
@@ -89,8 +90,8 @@ public class VinietasWS {
      * @throws IllegalArgumentException if a date is sent and can not be resolved.
      */
     @WebMethod(operationName = "findBetweenDates")
-    public List<Vinieta> findBetweenDates(@WebParam(name = "from") final String from, @WebParam(name = "to") final String to) throws IllegalArgumentException{
-        
+    public List<Vinieta> findBetweenDates(@WebParam(name = "from") final String from, @WebParam(name = "to") final String to)
+            throws IllegalArgumentException{
         Date start, end;
         if(from == null) {
             start = Date.valueOf(LocalDate.MIN);
@@ -106,6 +107,22 @@ public class VinietasWS {
         
         return ejbRef.findBetweenDates(start, end);
     }
-
     
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "top5Vinietas")
+    public List<Vinieta> top5VinietasPorPuntuacion() {
+        //TODO write your implementation code here:
+        return null;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "ultimasVinietas")
+    public List<Vinieta> ultimasVinietas() {
+        //TODO write your implementation code here:
+        return null;
+    }
 }

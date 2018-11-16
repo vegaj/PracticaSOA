@@ -20,7 +20,7 @@ import session.SerieFacade;
  * @author jose
  */
 @WebService(serviceName = "SeriesWS")
-@Stateless()
+@Stateless
 public class SeriesWS {
 
     @EJB
@@ -64,5 +64,32 @@ public class SeriesWS {
     public int count() {
         return ejbRef.count();
     }
-    
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "topFiveSeries")
+    public List<Serie> topFiveSeries() {
+        //TODO write your implementation code here:
+        return null;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "findAutores")
+    public List<String> findAutores() {
+        //TODO write your implementation code here:
+        return null;
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "searchSerie")
+    public List<Serie> searchSerie(@WebParam(name="autor") final String aut, @WebParam(name="page") Integer page) {
+        //TODO write your implementation code here:
+        return null;
+    }
+   
 }
