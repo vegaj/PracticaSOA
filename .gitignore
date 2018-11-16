@@ -4,3 +4,7 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+# Additional gitignore entries. 
+**/nbproject/genfiles.properties 
+**/nbproject/jaxws-build.xml 
