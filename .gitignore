@@ -10,3 +10,9 @@ nbdist/
 **/nbproject/jaxws-build\.xml 
 
 ServidorSOA/nbproject/project\.properties
+
+# IntelliJ
+.idea/
+*.iml
+*.class
+out/
