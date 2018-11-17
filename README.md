@@ -1,4 +1,5 @@
 # Practica SOA. Ingeniería Web 2018/2019.
+_Noviembre de 2018_
 
 ## Requisitos
 
@@ -13,7 +14,7 @@ _NOTA: no usar JDK 9 o superior, pues Netbeans dejará de funcionar._
 
 ### Glassfish 4.1
 
-Como Netbeans trae Glassfish 4.1.1, lo primero que tendremos que hacer es instalar Glassfish(__gf__) 4.1 en cualquier carpeta, la vamos a llamar _<gf-inst>_.
+Como Netbeans trae Glassfish 4.1.1, lo primero que tendremos que hacer es instalar Glassfish(__gf__) 4.1 en cualquier carpeta, la vamos a llamar _<gf-inst>_. Para obtenerlo, vamos a la sección de descargas de glassfish y descargaremos la versión _release/glassfish-4.1.zip_: [enlace aquí](https://download.oracle.com/glassfish/4.1/release/index.html). Para instalarlo, sólo tendremos que descomprimir el archivo en la carpeta que hayamos elegido.
 
 A continuación abrimos Netbeans (__nb__) y vamos a la pestaña __servicios__ y añadimos un __nuevo servidor__.
 Nos aseguramos de que en la ventana que aparece, tengamos marcado *local_domain* y en _browse_ buscamos el directorio _<gf-inst>_.
@@ -22,14 +23,18 @@ Le ponemos el nombre que queramos, en nuestro caso, vamos a llamarlo _GlassFish 
 ### Base de datos
 Vamos a utilizar la que viene por defecto, es decir __Derby__. Para crear una nueva, vamos a _Services_ > _Databases_ y hacemos click derecho en _Java DB_ > _Create database_.
 
-_Importante: la configuración de la base de datos que vamos a usar para el proyecto es la siguiente:_
+__Importante__: la configuración de la base de datos que vamos a usar para el proyecto es la siguiente:
 * __Database Name__: _iweb_
 * __User Name__: _iweb_
 * __Password__: _iweb_
+
 Damos a siguiente y se nos habrá creado.
 
 ## Conectar GlassFish a la base de datos
-Iniciamos el servicio de gf. Cuando esté encendido, vamos a la ventana de configuración del administrador (puerto 4848 en localhost, por defecto).
+Iniciamos el servicio de gf. Cuando esté encendido, vamos a la ventana de configuración del administrador (puerto 4848 en localhost, por defecto). A esta ventana podemos acceder de varias maneras:
+* En el navegador con la url: [localhost:4848](localhost:4848)
+* Haciendo click derecho en el servidor glassfish desde netbeans y abriendo la __consola de administración__.
+
 
 El primer paso será crear la _pool de conexiones_ a la base de datos iweb que hemos creado.
 
@@ -41,6 +46,7 @@ A continuación, en _Additional Properties_:
 * __User__: _iweb_
 * __Password__: _iweb_ 
 * __Database Name__: _iweb_
+
 Eliminamos los campos que no hemos rellenado y damos en _save_.
 
 El siguiente paso, será crear un nuevo _JDBC Resource_ en la misma ruta que la Pool. Lo crearemos con el __JNDI Name__: _jdbc/iweb_, con la Pool que creamos antes (__iwebPool__). Click OK.
@@ -88,11 +94,12 @@ Cuando nos pidan el __JDBC Connection Pool Name__ nos aseguramos de poner _iwebP
 ```
 
 5. Una vez tenemos la base de datos con las tablas con las que vamos a trabajar, vamos al proyecto, botón derecho en _Entity classes from Database_ con las tablas que queramos que tenga el proyecto, en este caso __Vinieta__ y __Serie__. Lo crearemos en el paquete jpa y utilizaremos la conexión que se habrá creado. Nos aseguramos de que se cree una __persistency unit__.
-_NOTA: **Entity classes from Database** se encuentra en la carpeta **persistence**_.
 
-6. __Arreglar la Persistency Unit__. En el directorio de configuración, encontraremos __persistence.xml__ que fue creado en el paso anterior, es posible que se genere mal. Para ello, editamos el xml de modo que pase de contener 
-  `<jta-data-source>java:app:jdbc/iweb</jta-data-source>` a
-  `<jta-data-source>jdbc/iweb</jta-data-source>`
+    _NOTA: **Entity classes from Database** se encuentra en la carpeta **persistence**_.
+
+6. __Arreglar la Persistency Unit__. En el directorio de configuración, encontraremos __persistence.xml__ que fue creado en el paso anterior, es posible que se genere mal. Para ello, editamos el xml de modo que pase de contener
+  * `<jta-data-source>java:app:jdbc/iweb</jta-data-source>` a 
+  * `<jta-data-source>jdbc/iweb</jta-data-source>`
 
 ### Configuración del SOA.
 
@@ -118,6 +125,10 @@ En estos casos, simplemente hay que modificar la pool que usa por la correcta.
 _Services_ > _GlassFish_ > _Resources_ > _JDBC_ > _JDBC Resources_.
 Hacemos click derecho en __jdbc/iweb__, propiedades y seleccionamos la pool __iwebPool__.
 
+## Consideraciones
+* Probado para Windows 10.
+* Adapta los nombres utilizados a tus necesidades particulares, _iwebPool_, _jdbc/iweb_, etc. Son reglas de nombres que hemos elegido nosotros. La cuestión es ser consistentes con ellos.
+* Consigue un _.gitignore_ bueno para tu proyecto, algunos como los que se pueden encontrar en _stackoverflow_ pueden servir, pero lo suyo es que añadas e ignores según tus necesidades.
 
 ## Agradecimientos 
 * A mi familia, por haberme apoyado durante todos estos años.

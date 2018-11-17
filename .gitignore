@@ -6,5 +6,7 @@ nbdist/
 .nb-gradle/
 
 # Additional gitignore entries. 
-**/nbproject/genfiles.properties 
-**/nbproject/jaxws-build.xml 
+**/nbproject/genfiles\.properties 
+**/nbproject/jaxws-build\.xml 
+
+ServidorSOA/nbproject/project\.properties

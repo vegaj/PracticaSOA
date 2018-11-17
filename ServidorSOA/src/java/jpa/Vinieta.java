@@ -35,7 +35,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Vinieta.findAll", query = "SELECT v FROM Vinieta v")
     , @NamedQuery(name = "Vinieta.findById", query = "SELECT v FROM Vinieta v WHERE v.id = :id")
     , @NamedQuery(name = "Vinieta.findByNombre", query = "SELECT v FROM Vinieta v WHERE v.nombre = :nombre")
-    , @NamedQuery(name = "Vinieta.findByFecha", query = "SELECT v FROM Vinieta v WHERE v.fecha = :fecha")})
+    , @NamedQuery(name = "Vinieta.findByFecha", query = "SELECT v FROM Vinieta v WHERE v.fecha = :fecha")
+    , @NamedQuery(name = "Vinieta.findByPuntuacion", query = "SELECT v FROM Vinieta v WHERE v.puntuacion = :puntuacion")})
 public class Vinieta implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,6 +53,8 @@ public class Vinieta implements Serializable {
     @Column(name = "FECHA")
     @Temporal(TemporalType.DATE)
     private Date fecha;
+    @Column(name = "PUNTUACION")
+    private Integer puntuacion;
     @JoinColumn(name = "IDSERIE", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Serie idserie;
@@ -90,6 +93,14 @@ public class Vinieta implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public Integer getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(Integer puntuacion) {
+        this.puntuacion = puntuacion;
     }
 
     public Serie getIdserie() {

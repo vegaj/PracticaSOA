@@ -54,12 +54,25 @@ public class VinietaFacade extends AbstractFacade<Vinieta> {
          
         List<Vinieta> result;
         
-        TypedQuery tq = em.createQuery("SELECT v FROM Vinieta V WHERE v.fecha BETWEEN :from AND :to", Vinieta.class);
+        TypedQuery tq = em.createQuery("SELECT v FROM Vinieta v WHERE v.fecha BETWEEN :from AND :to", Vinieta.class);
         tq.setParameter("from", from);
         tq.setParameter("to", to);
         result = tq.getResultList();
         
         return result;
     }
+    
+    public List<Vinieta> topVinietas(int limit) {  
+        TypedQuery tq = em.createQuery("SELECT v from Vinieta v ORDER BY v.puntuacion DESC", Vinieta.class);
+        tq.setMaxResults(limit);
+        return tq.getResultList();
+    }
+    
+    
+    public List<Vinieta> latestVinietas(int limit){
+        TypedQuery tq = em.createQuery("SELECT v FROM Vinieta v ORDER BY v.fecha DESC", Vinieta.class);
+        tq.setMaxResults(limit);
+        return tq.getResultList();
+    }    
 }
 
