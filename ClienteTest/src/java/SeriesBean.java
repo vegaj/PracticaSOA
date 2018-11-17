@@ -10,6 +10,7 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.xml.ws.WebServiceRef;
 import ws.Serie;
+import ws.SeriesWS;
 import ws.SeriesWS_Service;
 
 /**
@@ -20,32 +21,48 @@ import ws.SeriesWS_Service;
 @SessionScoped
 public class SeriesBean implements Serializable {
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/SeriesWS/SeriesWS.wsdl")
+    @WebServiceRef(wsdlLocation = "http://localhost:8080/SeriesWS/SeriesWS?wsdl")
     private SeriesWS_Service service;
-    private Serie s;
+    
+    /* VARIABLES */
+    
+    private SeriesWS port;
+    private Serie serie;
 
-    public Serie getS() {
-        return s;
-    }
-
-    public void setS(Serie s) {
-        this.s = s;
-    }
     /**
      * Creates a new instance of SeriesBean
      */
     public SeriesBean() {
     }
     
-    public String crear(){
-        service.getSeriesWSPort().create(s);
-        return "index";
-    }
-
     @PostConstruct
     public void init(){
-        
+        port = service.getSeriesWSPort();
     }
+    
+    /* GETTERS AND SETTERS */
+
+    public Serie getSerie() {
+        return serie;
+    }
+
+    public void setSerie(Serie serie) {
+        this.serie = serie;
+    }
+    
+    /* METODOS PARA PROBAR LOS SERVICIOS */
+    
+    public String nuevaSerie(){
+        return "nuevaSerie.xhtml";
+    }
+    
+    public String crear(){
+        service.getSeriesWSPort().create(serie);
+        return "index.xhtml";
+    }
+    
+    /* OPERACIONES DE LOS SERVICIOS */ 
+
     private void create(ws.Serie entity) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
