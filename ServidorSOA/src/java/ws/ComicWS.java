@@ -101,7 +101,7 @@ public class ComicWS {
     
     @WebMethod(operationName = "createVinieta")
     @Oneway
-    public void create(@WebParam(name = "entity") Vinieta entity) {
+    public void createVinieta(@WebParam(name = "entity") Vinieta entity) {
         vinietaFacade.create(entity);
     }
 
@@ -133,7 +133,7 @@ public class ComicWS {
     }
 
     @WebMethod(operationName = "countVinietas")
-    public int count() {
+    public int countVinietas() {
         return vinietaFacade.count();
     }
 
