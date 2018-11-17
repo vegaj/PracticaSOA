@@ -32,6 +32,7 @@ public class SerieFacade extends AbstractFacade<Serie> {
 
     /**
      * @return a list with all the different authors
+     * MAngeles
      */
     public List<String> authors(){
         throw new UnsupportedOperationException("Not implemented yet");    
@@ -41,6 +42,7 @@ public class SerieFacade extends AbstractFacade<Serie> {
      * 
      * @param name
      * @return a list of series with the given name in it.
+     * MAngeles
      */
     public List<Serie> searchSerieByName(String name) {
         throw new UnsupportedOperationException("Not implemented yet");

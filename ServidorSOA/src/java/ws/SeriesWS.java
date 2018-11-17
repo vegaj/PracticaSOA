@@ -76,7 +76,9 @@ public class SeriesWS {
 
     /**
      * Web service operation
+     * MAngeles
      */
+    
     @WebMethod(operationName = "findAutores")
     public List<String> findAutores() {
         throw new UnsupportedOperationException("Not implemented yet");
@@ -84,9 +86,11 @@ public class SeriesWS {
 
     /**
      * Web service operation
+     * MAngeles
+     * Buscar las series de un autor en concreto, con paginación de 10 en 10
      */
-    @WebMethod(operationName = "searchSerie")
-    public List<Serie> searchSerie(@WebParam(name="autor") final String aut) {
+    @WebMethod(operationName = "searchSerieByAutor")
+    public List<Serie> searchSerieByAutor(@WebParam(name="autor") final String aut) {
         throw new UnsupportedOperationException("Not implemented yet");
     }
    
