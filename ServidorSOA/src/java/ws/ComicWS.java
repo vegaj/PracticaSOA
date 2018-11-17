@@ -65,7 +65,7 @@ public class ComicWS {
         return serieFacade.findRange(range);
     }
 
-    @WebMethod(operationName = "count")
+    @WebMethod(operationName = "countSeries")
     public int countSeries() {
         return serieFacade.count();
     }
