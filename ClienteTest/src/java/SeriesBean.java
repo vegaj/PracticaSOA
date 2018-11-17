@@ -27,10 +27,10 @@ public class SeriesBean implements Serializable {
     
     /* VARIABLES */
     
-    private SeriesWS port;
     private Serie serie;
-    List<Serie> series;
-    Serie serieEditada;
+    private List<Serie> series;
+    private Serie serieEditada;
+    private String nombreBuscar;
     /**
      * Creates a new instance of SeriesBean
      */
@@ -40,7 +40,6 @@ public class SeriesBean implements Serializable {
     @PostConstruct
     public void init(){
         serie = new Serie();
-        series = service.getSeriesWSPort().findAll();
     }
     
     /* GETTERS AND SETTERS */
@@ -67,6 +66,14 @@ public class SeriesBean implements Serializable {
 
     public void setSerieEditada(Serie serieEditada) {
         this.serieEditada = serieEditada;
+    }
+
+    public String getNombreBuscar() {
+        return nombreBuscar;
+    }
+
+    public void setNombreBuscar(String nombreBuscar) {
+        this.nombreBuscar = nombreBuscar;
     }
     
     /* METODOS PARA PROBAR LOS SERVICIOS */
@@ -96,7 +103,7 @@ public class SeriesBean implements Serializable {
     }
     
     public String guardar(){
-        port.edit(serieEditada);
+        service.getSeriesWSPort().edit(serieEditada);
         return "index.xhtml";
     }
     
@@ -105,6 +112,9 @@ public class SeriesBean implements Serializable {
         return "listadoSeries.xhtml";
     }
     
+    public String volver(){
+        return "index.xhtml";
+    }
     
     /* OPERACIONES DE LOS SERVICIOS */ 
 
