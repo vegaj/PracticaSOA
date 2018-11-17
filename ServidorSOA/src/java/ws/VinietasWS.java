@@ -108,18 +108,18 @@ public class VinietasWS {
     }
     
     /**
-     * Web service operation
+     * @return the top 5 vinietas ordered by puntuacion in descendent order
      */
     @WebMethod(operationName = "top5Vinietas")
     public List<Vinieta> top5VinietasPorPuntuacion() {
-        return ejbRef.topVinietas();
+        return ejbRef.topVinietas(5);
     }
 
     /**
-     * Web service operation
+     * @return the latest 10 vinietas from newest to older
      */
     @WebMethod(operationName = "ultimasVinietas")
     public List<Vinieta> ultimasVinietas() {
-        return ejbRef.latestVinietas();
+        return ejbRef.latestVinietas(10);
     }
 }
