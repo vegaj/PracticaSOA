@@ -112,7 +112,7 @@ public class VinietasWS {
      */
     @WebMethod(operationName = "top5Vinietas")
     public List<Vinieta> top5VinietasPorPuntuacion() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return ejbRef.topVinietas();
     }
 
     /**

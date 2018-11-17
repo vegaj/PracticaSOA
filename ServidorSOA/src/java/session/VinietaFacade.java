@@ -54,7 +54,7 @@ public class VinietaFacade extends AbstractFacade<Vinieta> {
          
         List<Vinieta> result;
         
-        TypedQuery tq = em.createQuery("SELECT v FROM Vinieta V WHERE v.fecha BETWEEN :from AND :to", Vinieta.class);
+        TypedQuery tq = em.createQuery("SELECT v FROM Vinieta v WHERE v.fecha BETWEEN :from AND :to", Vinieta.class);
         tq.setParameter("from", from);
         tq.setParameter("to", to);
         result = tq.getResultList();
@@ -63,7 +63,9 @@ public class VinietaFacade extends AbstractFacade<Vinieta> {
     }
     
     public List<Vinieta> topVinietas() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        TypedQuery tq = em.createQuery("SELECT v from Vinieta v ORDER BY v.puntuacion DESC", Vinieta.class);
+        tq.setMaxResults(5);
+        return tq.getResultList();
     }
     
     
