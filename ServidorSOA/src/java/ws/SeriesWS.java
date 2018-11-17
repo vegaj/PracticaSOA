@@ -79,17 +79,15 @@ public class SeriesWS {
      */
     @WebMethod(operationName = "findAutores")
     public List<String> findAutores() {
-        //TODO write your implementation code here:
-        return null;
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 
     /**
      * Web service operation
      */
     @WebMethod(operationName = "searchSerie")
-    public List<Serie> searchSerie(@WebParam(name="autor") final String aut, @WebParam(name="page") Integer page) {
-        //TODO write your implementation code here:
-        return null;
+    public List<Serie> searchSerie(@WebParam(name="autor") final String aut) {
+        throw new UnsupportedOperationException("Not implemented yet");
     }
    
 }

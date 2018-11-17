@@ -61,5 +61,14 @@ public class VinietaFacade extends AbstractFacade<Vinieta> {
         
         return result;
     }
+    
+    public List<Vinieta> topVinietas() {
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
+    
+    
+    public List<Vinieta> latestVinietas(){
+        throw new UnsupportedOperationException("Not implemented yet");
+    }
 }
 

@@ -67,7 +67,6 @@ public class VinietasWS {
         return ejbRef.count();
     }
 
-    
     /**
      * Web service operation
      * @param date to search by format YYYY-MM-DD
@@ -113,8 +112,7 @@ public class VinietasWS {
      */
     @WebMethod(operationName = "top5Vinietas")
     public List<Vinieta> top5VinietasPorPuntuacion() {
-        //TODO write your implementation code here:
-        return null;
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 
     /**
@@ -122,7 +120,6 @@ public class VinietasWS {
      */
     @WebMethod(operationName = "ultimasVinietas")
     public List<Vinieta> ultimasVinietas() {
-        //TODO write your implementation code here:
-        return null;
+        throw new UnsupportedOperationException("Not implemented yet");
     }
 }
