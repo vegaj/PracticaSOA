@@ -7,6 +7,7 @@
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.xml.ws.WebServiceRef;
 import ws.Serie;
@@ -28,7 +29,8 @@ public class SeriesBean implements Serializable {
     
     private SeriesWS port;
     private Serie serie;
-
+    List<Serie> series;
+    Serie serieEditada;
     /**
      * Creates a new instance of SeriesBean
      */
@@ -39,6 +41,7 @@ public class SeriesBean implements Serializable {
     public void init(){
         port = service.getSeriesWSPort();
         serie = new Serie();
+        series = service.getSeriesWSPort().findAll();
     }
     
     /* GETTERS AND SETTERS */
@@ -49,6 +52,22 @@ public class SeriesBean implements Serializable {
 
     public void setSerie(Serie serie) {
         this.serie = serie;
+    }    
+    
+    public List<Serie> getSeries() {
+        return series;
+    }
+
+    public void setSeries(List<Serie> series) {
+        this.series = series;
+    }
+    
+    public Serie getSerieEditada() {
+        return serieEditada;
+    }
+
+    public void setSerieEditada(Serie serieEditada) {
+        this.serieEditada = serieEditada;
     }
     
     /* METODOS PARA PROBAR LOS SERVICIOS */
@@ -73,7 +92,13 @@ public class SeriesBean implements Serializable {
     }
     
     public String editarSerie(Serie s){
+        serieEditada = s;
         return "editarSerie.xhtml";
+    }
+    
+    public String guardar(){
+        port.edit(serieEditada);
+        return "index.xhtml";
     }
     
     public String mostrarSeries(){

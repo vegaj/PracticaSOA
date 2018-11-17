@@ -1,7 +1,8 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Listado de Series</title>
     </h:head>
@@ -15,8 +16,34 @@
         y haya un boton de volver al index), yo lo he puesto para que vuelva a index, 
         pero si lo ves mejor de la otra forma habria que cambiar el return del metodo borrarSerie
         -->
-        <h:commandButton action="#{seriesBean.editarSerie(item)}" value="Editar serie"/> <br/>
-        <h:commandButton action="#{seriesBean.borrarSerie(item)}" value="Borrar serie"/> <br/>
+        <h:form>
+        <h:dataTable value="#{seriesBean.series}" var="s">
+            <h:column>
+                <f:facet name="header">
+                    Nombre
+                </f:facet>
+                #{s.nombre}
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    Autor
+                </f:facet>
+                #{s.autor}
+            </h:column>
+            <h:column>
+                <f:facet name="header">
+                    Puntuación
+                </f:facet>
+                #{s.puntuacion}
+            </h:column>
+            <h:column>
+                <h:commandButton action="#{seriesBean.editarSerie(s)}" value="Editar serie"/> <br/>
+            </h:column>
+             <h:column>
+                <h:commandButton action="#{seriesBean.borrarSerie(s)}" value="Borrar serie"/> <br/>
+            </h:column>                        
+        </h:dataTable>       
+        </h:form>
     </h:body>
 </html>
 
