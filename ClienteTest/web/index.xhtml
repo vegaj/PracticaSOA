@@ -6,11 +6,12 @@
         <title>Comics</title>
     </h:head>
     <h:body>
-        Series
-        
+        <b>Series</b><br/>
         <h:form>
             <h:outputLabel value="Crear una nueva serie" />
-            <h:commandButton action="#{seriesBean.nuevaSerie()}" value="Nueva serie"/> <br/>
+            <h:commandButton action="#{seriesBean.nuevaSerie()}" value="Nueva serie"/> <br/><br/>
+            <h:outputLabel value="Listado de series" />
+            <h:commandButton action="#{seriesBean.mostrarSeries()}" value="Mostrar serie"/> <br/><br/>
         </h:form>
     </h:body>
 </html>

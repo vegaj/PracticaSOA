@@ -38,6 +38,7 @@ public class SeriesBean implements Serializable {
     @PostConstruct
     public void init(){
         port = service.getSeriesWSPort();
+        serie = new Serie();
     }
     
     /* GETTERS AND SETTERS */
@@ -53,13 +54,31 @@ public class SeriesBean implements Serializable {
     /* METODOS PARA PROBAR LOS SERVICIOS */
     
     public String nuevaSerie(){
+        //redirige al formulario para introducir los datos de la serie
         return "nuevaSerie.xhtml";
     }
     
     public String crear(){
-        service.getSeriesWSPort().create(serie);
+        //llama al servicio para insertar la serie en la BD
+        port.create(serie);
+        // una vez se ha insertado se vuelve a inicializar para que se pueda volver a utilizar
+        this.serie = new Serie();
         return "index.xhtml";
     }
+    
+    public String borrarSerie(Serie s){
+        port.remove(s);
+        return "index.xhtml";
+    }
+    
+    public String editarSerie(Serie s){
+        return "editarSerie.xhtml";
+    }
+    
+    public String mostrarSeries(){
+        return "listadoSeries.xhtml";
+    }
+    
     
     /* OPERACIONES DE LOS SERVICIOS */ 
 
