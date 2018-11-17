@@ -39,7 +39,6 @@ public class SeriesBean implements Serializable {
     
     @PostConstruct
     public void init(){
-        port = service.getSeriesWSPort();
         serie = new Serie();
         series = service.getSeriesWSPort().findAll();
     }
@@ -79,7 +78,7 @@ public class SeriesBean implements Serializable {
     
     public String crear(){
         //llama al servicio para insertar la serie en la BD
-        port.create(serie);
+        service.getSeriesWSPort().create(serie);
         // una vez se ha insertado se vuelve a inicializar para que se pueda volver a utilizar
         this.serie = new Serie();
         return "index.xhtml";
@@ -87,7 +86,7 @@ public class SeriesBean implements Serializable {
     
     public String borrarSerie(Serie s){
         //borra la serie de la base de datos
-        port.remove(s);
+        service.getSeriesWSPort().remove(s);
         return "index.xhtml";
     }
     
@@ -102,6 +101,7 @@ public class SeriesBean implements Serializable {
     }
     
     public String mostrarSeries(){
+        series = service.getSeriesWSPort().findAll();
         return "listadoSeries.xhtml";
     }
     
