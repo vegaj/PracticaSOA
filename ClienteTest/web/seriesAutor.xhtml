@@ -11,21 +11,21 @@
         <br/>
         <h:form>
             <h:dataTable value="#{seriesBean.series}" var="s">
-            <h:column>
-                <f:facet name="header">
-                    Nombre
-                </f:facet>
-                #{s.nombre}
-            </h:column>            
-            <h:column>
-                <f:facet name="header">
-                    Puntuación
-                </f:facet>
-                #{s.puntuacion}
-            </h:column>                                  
-        </h:dataTable>  
-            <h:outputText value="Total de series: "#{seriesBean.contar()}/>            
-            <h:commandButton action="#{seriesBean.volver()}" value="Volver"/> <br/>
+                <h:column>
+                    <f:facet name="header">
+                        Nombre
+                    </f:facet>
+                    #{s.nombre}
+                </h:column>            
+                <h:column>
+                    <f:facet name="header">
+                        Puntuación
+                    </f:facet>
+                    #{s.puntuacion}
+                </h:column>                                  
+            </h:dataTable>  <br/>
+            <h:outputText value="Total de series: "#{seriesBean.contar()}/>  <br/>          
+            <h:commandButton action="#{seriesBean.volver()}" value="Volver"/> 
         </h:form>
     </h:body>
 </html>

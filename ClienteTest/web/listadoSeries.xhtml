@@ -6,41 +6,41 @@
     <h:head>
         <title>Listado de Series</title>
     </h:head>
-    <h:body> 
-        
+    <h:body>        
         <h:form>
-        <h:outputText value="Top 5 series más valoradas"/><br/><br/>
-        <h:commandButton action="#{seriesBean.actualizarTabla()}" value="Listar"/>
+            <h:outputText value="Top 5 series más valoradas"/>
+            <h:commandButton action="#{seriesBean.actualizarTabla()}" value="Listar"/>
         </h:form>
         <br/><br/>
         <h:form>
-        <h:dataTable id="tabla" value="#{seriesBean.series}" var="s">
-            <h:column>
-                <f:facet name="header">
-                    Nombre
-                </f:facet>
-                #{s.nombre}
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    Autor
-                </f:facet>
-                #{s.autor}
-            </h:column>
-            <h:column>
-                <f:facet name="header">
-                    Puntuación
-                </f:facet>
-                #{s.puntuacion}
-            </h:column>
-            <h:column>
-                <h:commandButton action="#{seriesBean.editarSerie(s)}" value="Editar serie"/> <br/>
-            </h:column>
-             <h:column>
-                <h:commandButton action="#{seriesBean.borrarSerie(s)}" value="Borrar serie"/> <br/>
-            </h:column>                        
-        </h:dataTable>  
-            <h:commandButton action="#{seriesBean.volver()}" value="Volver a index"/> <br/>
+            <h:dataTable id="tabla" value="#{seriesBean.series}" var="s">
+                <h:column>
+                    <f:facet name="header">
+                        Nombre
+                    </f:facet>
+                    #{s.nombre}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Autor
+                    </f:facet>
+                    #{s.autor}
+                </h:column>
+                <h:column>
+                    <f:facet name="header">
+                        Puntuación
+                    </f:facet>
+                    #{s.puntuacion}
+                </h:column>
+                <h:column>
+                    <h:commandButton action="#{seriesBean.editarSerie(s)}" value="Editar serie"/> <br/>
+                </h:column>
+                <h:column>
+                    <h:commandButton action="#{seriesBean.borrarSerie(s)}" value="Borrar serie"/> <br/>
+                </h:column>                        
+            </h:dataTable> 
+            <br/><br/>
+            <h:commandButton action="#{seriesBean.volver()}" value="Volver"/> <br/>
         </h:form>
     </h:body>
 </html>

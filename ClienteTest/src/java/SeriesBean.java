@@ -10,8 +10,9 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.xml.ws.WebServiceRef;
+import ws.ComicWS_Service;
 import ws.Serie;
-import ws.SeriesWS_Service;
+import ws.Vinieta;
 
 /**
  *
@@ -21,33 +22,29 @@ import ws.SeriesWS_Service;
 @SessionScoped
 public class SeriesBean implements Serializable {
 
-    @WebServiceRef(wsdlLocation = "http://localhost:8080/SeriesWS/SeriesWS?wsdl")
-    private SeriesWS_Service service;
-    
+    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/ComicWS/ComicWS.wsdl")
+    private ComicWS_Service service;
+
     /* VARIABLES */
-    
     private Serie serie;
     private List<Serie> series;
     private Serie serieEditada;
-    private String nombreBuscar;
     private String autorSeleccionado;
-    private List<Serie> autores;
+    private List<String> autores;
 
-    
     /**
      * Creates a new instance of SeriesBean
      */
     public SeriesBean() {
     }
-    
+
     @PostConstruct
-    public void init(){
-        serie = new Serie();
-        autores = service.getSeriesWSPort().findAutores();
+    public void init() {
+        this.serie = new Serie();
+        this.autores = findAutores();
     }
-    
+
     /* GETTERS AND SETTERS */
-    
     public String getAutorSeleccionado() {
         return autorSeleccionado;
     }
@@ -56,11 +53,11 @@ public class SeriesBean implements Serializable {
         this.autorSeleccionado = autorSeleccionado;
     }
 
-    public List<Serie> getAutores() {
+    public List<String> getAutores() {
         return autores;
     }
 
-    public void setAutores(List<Serie> autores) {
+    public void setAutores(List<String> autores) {
         this.autores = autores;
     }
 
@@ -70,8 +67,8 @@ public class SeriesBean implements Serializable {
 
     public void setSerie(Serie serie) {
         this.serie = serie;
-    }    
-    
+    }
+
     public List<Serie> getSeries() {
         return series;
     }
@@ -79,7 +76,7 @@ public class SeriesBean implements Serializable {
     public void setSeries(List<Serie> series) {
         this.series = series;
     }
-    
+
     public Serie getSerieEditada() {
         return serieEditada;
     }
@@ -88,117 +85,206 @@ public class SeriesBean implements Serializable {
         this.serieEditada = serieEditada;
     }
 
-    public String getNombreBuscar() {
-        return nombreBuscar;
-    }
-
-    public void setNombreBuscar(String nombreBuscar) {
-        this.nombreBuscar = nombreBuscar;
-    }
-    
     /* METODOS PARA PROBAR LOS SERVICIOS */
-    
-    public String nuevaSerie(){
+    public String nuevaSerie() {
         //redirige al formulario para introducir los datos de la serie
         return "nuevaSerie.xhtml";
     }
-    
-    public String crear(){
+
+    public String crear() {
         //llama al servicio para insertar la serie en la BD
-        service.getSeriesWSPort().create(serie);
+        createSerie(serie);
         // una vez se ha insertado se vuelve a inicializar para que se pueda volver a utilizar
         this.serie = new Serie();
         return "index.xhtml";
     }
-    
-    public String borrarSerie(Serie s){
+
+    public String borrarSerie(Serie s) {
         //borra la serie de la base de datos
-        service.getSeriesWSPort().remove(s);
+        removeSerie(s);
         return "index.xhtml";
     }
-    
-    public String editarSerie(Serie s){
+
+    public String editarSerie(Serie s) {
         serieEditada = s;
         return "editarSerie.xhtml";
     }
-    
-    public String guardar(){
-        service.getSeriesWSPort().edit(serieEditada);
+
+    public String guardar() {
+        editSerie(serieEditada);
         return "index.xhtml";
     }
-    
-    public String mostrarSeries(){
-        series = service.getSeriesWSPort().findAll();
+
+    public String mostrarSeries() {
+        series = findAllSeries();
         return "listadoSeries.xhtml";
     }
-    
-    public String volver(){
+
+    public String volver() {
         return "index.xhtml";
     }
-    
-    public String actualizarTabla(){
-        series = service.getSeriesWSPort().topFiveSeries();
+
+    public String actualizarTabla() {
+        series = topFiveSeries();
         return "listadoSeries.xhtml";
     }
-    
-    public String buscarAutor(){
-        series = service.getSeriesWSPort().searchSerieByAutor(autorSeleccionado);
+
+    public String buscarAutor() {
+        series = searchSerieByAutor(autorSeleccionado);
         return "seriesAutor.xhtml";
     }
+
+    public Integer contar() {
+        return countSeries();
+    }
+
+    /* OPERACIONES DE LOS SERVICIOS */
     
-    public Integer contar(){
-        return service.getSeriesWSPort().count();
-    }
-    
-    /* OPERACIONES DE LOS SERVICIOS */ 
-
-    private void create(ws.Serie entity) {
+    private int countSeries() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
-        ws.SeriesWS port = service.getSeriesWSPort();
-        port.create(entity);
+        ws.ComicWS port = service.getComicWSPort();
+        return port.countSeries();
     }
 
-    private void edit(ws.Serie entity) {
+    private int countVinietas() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
-        ws.SeriesWS port = service.getSeriesWSPort();
-        port.edit(entity);
+        ws.ComicWS port = service.getComicWSPort();
+        return port.countVinietas();
     }
 
-    private int count() {
+    private void createSerie(ws.Serie entity) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
-        ws.SeriesWS port = service.getSeriesWSPort();
-        return port.count();
+        ws.ComicWS port = service.getComicWSPort();
+        port.createSerie(entity);
     }
 
-    private Serie find(java.lang.Object id) {
+    private void createVinieta(ws.Vinieta entity) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
-        ws.SeriesWS port = service.getSeriesWSPort();
-        return port.find(id);
+        ws.ComicWS port = service.getComicWSPort();
+        port.createVinieta(entity);
     }
 
-    private java.util.List<ws.Serie> findAll() {
+    private void editSerie(ws.Serie entity) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
-        ws.SeriesWS port = service.getSeriesWSPort();
-        return port.findAll();
+        ws.ComicWS port = service.getComicWSPort();
+        port.editSerie(entity);
     }
 
-    private java.util.List<ws.Serie> findRange(java.util.List<java.lang.Integer> range) {
+    private void editVinieta(ws.Vinieta entity) {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
-        ws.SeriesWS port = service.getSeriesWSPort();
-        return port.findRange(range);
+        ws.ComicWS port = service.getComicWSPort();
+        port.editVinieta(entity);
     }
 
-    private void remove(ws.Serie entity) {
+    private java.util.List<ws.Serie> findAllSeries() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
-        ws.SeriesWS port = service.getSeriesWSPort();
-        port.remove(entity);
+        ws.ComicWS port = service.getComicWSPort();
+        return port.findAllSeries();
     }
-    
+
+    private java.util.List<ws.Vinieta> findAllVinietas() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.ComicWS port = service.getComicWSPort();
+        return port.findAllVinietas();
+    }
+
+    private java.util.List<java.lang.String> findAutores() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.ComicWS port = service.getComicWSPort();
+        return port.findAutores();
+    }
+
+    private java.util.List<ws.Serie> findRangeSeries(java.util.List<java.lang.Integer> range) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.ComicWS port = service.getComicWSPort();
+        return port.findRangeSeries(range);
+    }
+
+    private java.util.List<ws.Vinieta> findRangeVinietas(java.util.List<java.lang.Integer> range) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.ComicWS port = service.getComicWSPort();
+        return port.findRangeVinietas(range);
+    }
+
+    private Serie findSerie(java.lang.Object id) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.ComicWS port = service.getComicWSPort();
+        return port.findSerie(id);
+    }
+
+    private Vinieta findVinieta(java.lang.Object id) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.ComicWS port = service.getComicWSPort();
+        return port.findVinieta(id);
+    }
+
+    private java.util.List<ws.Vinieta> findVinietasBetweenDates(java.lang.String from, java.lang.String to) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.ComicWS port = service.getComicWSPort();
+        return port.findVinietasBetweenDates(from, to);
+    }
+
+    private java.util.List<ws.Vinieta> findVinietasByDate(java.lang.String date) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.ComicWS port = service.getComicWSPort();
+        return port.findVinietasByDate(date);
+    }
+
+    private void removeSerie(ws.Serie entity) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.ComicWS port = service.getComicWSPort();
+        port.removeSerie(entity);
+    }
+
+    private void removeVinieta(ws.Vinieta entity) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.ComicWS port = service.getComicWSPort();
+        port.removeVinieta(entity);
+    }
+
+    private java.util.List<ws.Serie> searchSerieByAutor(java.lang.String autor) {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.ComicWS port = service.getComicWSPort();
+        return port.searchSerieByAutor(autor);
+    }
+
+    private java.util.List<ws.Vinieta> top5Vinietas() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.ComicWS port = service.getComicWSPort();
+        return port.top5Vinietas();
+    }
+
+    private java.util.List<ws.Serie> topFiveSeries() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.ComicWS port = service.getComicWSPort();
+        return port.topFiveSeries();
+    }
+
+    private java.util.List<ws.Vinieta> ultimasVinietas() {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        ws.ComicWS port = service.getComicWSPort();
+        return port.ultimasVinietas();
+    }
+
 }
