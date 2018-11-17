@@ -6,18 +6,15 @@
     <h:head>
         <title>Listado de Series</title>
     </h:head>
-    <h:body>
-        <!-- 
-        Mi idea una tabla con todas las series y en las dos ultimas columnas
-        que una sea un boton de editar que te lleve a un formulario como el de 
-        crear serie (editarSerie.xhtml) y otro boton para borrar que borre la serie (se le pasa la serie) 
-        y si se ha borrado bien que te lleve al index (no se si es mejor el index 
-        o que vuelva a cargar la lista de series (que se quede en la misma pagina) 
-        y haya un boton de volver al index), yo lo he puesto para que vuelva a index, 
-        pero si lo ves mejor de la otra forma habria que cambiar el return del metodo borrarSerie
-        -->
+    <h:body> 
+        
         <h:form>
-        <h:dataTable value="#{seriesBean.series}" var="s">
+        <h:outputText value="Top 5 series más valoradas"/><br/><br/>
+        <h:commandButton action="#{seriesBean.actualizarTabla()}" value="Listar"/>
+        </h:form>
+        <br/><br/>
+        <h:form>
+        <h:dataTable id="tabla" value="#{seriesBean.series}" var="s">
             <h:column>
                 <f:facet name="header">
                     Nombre

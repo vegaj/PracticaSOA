@@ -11,7 +11,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.xml.ws.WebServiceRef;
 import ws.Serie;
-import ws.SeriesWS;
 import ws.SeriesWS_Service;
 
 /**
@@ -31,6 +30,10 @@ public class SeriesBean implements Serializable {
     private List<Serie> series;
     private Serie serieEditada;
     private String nombreBuscar;
+    private String autorSeleccionado;
+    private List<Serie> autores;
+
+    
     /**
      * Creates a new instance of SeriesBean
      */
@@ -40,9 +43,26 @@ public class SeriesBean implements Serializable {
     @PostConstruct
     public void init(){
         serie = new Serie();
+        autores = service.getSeriesWSPort().findAutores();
     }
     
     /* GETTERS AND SETTERS */
+    
+    public String getAutorSeleccionado() {
+        return autorSeleccionado;
+    }
+
+    public void setAutorSeleccionado(String autorSeleccionado) {
+        this.autorSeleccionado = autorSeleccionado;
+    }
+
+    public List<Serie> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(List<Serie> autores) {
+        this.autores = autores;
+    }
 
     public Serie getSerie() {
         return serie;
@@ -114,6 +134,20 @@ public class SeriesBean implements Serializable {
     
     public String volver(){
         return "index.xhtml";
+    }
+    
+    public String actualizarTabla(){
+        series = service.getSeriesWSPort().topFiveSeries();
+        return "listadoSeries.xhtml";
+    }
+    
+    public String buscarAutor(){
+        series = service.getSeriesWSPort().searchSerieByAutor(autorSeleccionado);
+        return "seriesAutor.xhtml";
+    }
+    
+    public Integer contar(){
+        return service.getSeriesWSPort().count();
     }
     
     /* OPERACIONES DE LOS SERVICIOS */ 
