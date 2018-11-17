@@ -67,6 +67,7 @@ public class SeriesBean implements Serializable {
     }
     
     public String borrarSerie(Serie s){
+        //borra la serie de la base de datos
         port.remove(s);
         return "index.xhtml";
     }
