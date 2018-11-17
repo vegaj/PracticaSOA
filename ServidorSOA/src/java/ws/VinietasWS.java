@@ -120,6 +120,6 @@ public class VinietasWS {
      */
     @WebMethod(operationName = "ultimasVinietas")
     public List<Vinieta> ultimasVinietas() {
-        throw new UnsupportedOperationException("Not implemented yet");
+        return ejbRef.latestVinietas();
     }
 }

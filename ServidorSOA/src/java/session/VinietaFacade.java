@@ -70,7 +70,9 @@ public class VinietaFacade extends AbstractFacade<Vinieta> {
     
     
     public List<Vinieta> latestVinietas(){
-        throw new UnsupportedOperationException("Not implemented yet");
+        TypedQuery tq = em.createQuery("SELECT v FROM Vinieta v ORDER BY v.fecha DESC", Vinieta.class);
+        tq.setMaxResults(5);
+        return tq.getResultList();
     }
 }
 
