@@ -74,11 +74,10 @@ public class VinietaFacade extends AbstractFacade<Vinieta> {
         return tq.getResultList();
     }    
     
-    public List<Vinieta> findBySerie(Integer idSerie) {        
+    public List<Vinieta> findBySerie(Object idSerie) {        
         List<Vinieta> result;
-        
         TypedQuery tq = em.createQuery("SELECT v FROM Vinieta V WHERE v.idserie = :idSerie", Vinieta.class);
-        tq.setParameter("idSerie", '%' + idSerie + '%');
+        tq.setParameter("idSerie", idSerie);
         result = tq.getResultList();
         return result;
     }

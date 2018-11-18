@@ -202,8 +202,8 @@ public class ComicWS {
     * @return Listado de viñetas de una determinada serie con "idSerie"
     */
     @WebMethod(operationName = "searchVinietaBySerie")
-    public List<Vinieta> searchVinietaBySerie(@WebParam(name = "idSerie") final String idSerie) throws IllegalArgumentException{
-        return vinietaFacade.findBySerie(Integer.valueOf(idSerie));            
+    public List<Vinieta> searchVinietaBySerie(@WebParam(name = "serie") Object idSerie) throws IllegalArgumentException{
+        return vinietaFacade.findBySerie(idSerie);            
     }
             
 }
