@@ -3,20 +3,21 @@ package ws;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for create complex type.
+ * <p>Java class for findVinietaResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="create">
+ * &lt;complexType name="findVinietaResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="entity" type="{http://ws/}serie" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://ws/}vinieta" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -26,35 +27,36 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "create", propOrder = {
-    "entity"
+@XmlType(name = "findVinietaResponse", propOrder = {
+    "_return"
 })
-public class Create {
+public class FindVinietaResponse {
 
-    protected Serie entity;
+    @XmlElement(name = "return")
+    protected Vinieta _return;
 
     /**
-     * Gets the value of the entity property.
+     * Gets the value of the return property.
      * 
      * @return
      *     possible object is
-     *     {@link Serie }
+     *     {@link Vinieta }
      *     
      */
-    public Serie getEntity() {
-        return entity;
+    public Vinieta getReturn() {
+        return _return;
     }
 
     /**
-     * Sets the value of the entity property.
+     * Sets the value of the return property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Serie }
+     *     {@link Vinieta }
      *     
      */
-    public void setEntity(Serie value) {
-        this.entity = value;
+    public void setReturn(Vinieta value) {
+        this._return = value;
     }
 
 }

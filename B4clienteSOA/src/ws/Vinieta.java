@@ -22,6 +22,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *         &lt;element name="idserie" type="{http://ws/}serie" minOccurs="0"/>
  *         &lt;element name="nombre" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="puntuacion" type="{http://www.w3.org/2001/XMLSchema}int" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,7 +36,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "fecha",
     "id",
     "idserie",
-    "nombre"
+    "nombre",
+    "puntuacion"
 })
 public class Vinieta {
 
@@ -44,6 +46,7 @@ public class Vinieta {
     protected Integer id;
     protected Serie idserie;
     protected String nombre;
+    protected Integer puntuacion;
 
     /**
      * Gets the value of the fecha property.
@@ -139,6 +142,30 @@ public class Vinieta {
      */
     public void setNombre(String value) {
         this.nombre = value;
+    }
+
+    /**
+     * Gets the value of the puntuacion property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Integer }
+     *     
+     */
+    public Integer getPuntuacion() {
+        return puntuacion;
+    }
+
+    /**
+     * Sets the value of the puntuacion property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Integer }
+     *     
+     */
+    public void setPuntuacion(Integer value) {
+        this.puntuacion = value;
     }
 
 }

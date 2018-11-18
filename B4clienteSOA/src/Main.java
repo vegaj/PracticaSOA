@@ -10,10 +10,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("view/main.fxml"));
         primaryStage.setTitle("Comics");
-        primaryStage.setScene(new Scene(root, 1000, 700));
+        primaryStage.setScene(new Scene(root, 1200, 700));
         primaryStage.show();
-    }
 
+    }
 
     public static void main(String[] args) {
         launch(args);

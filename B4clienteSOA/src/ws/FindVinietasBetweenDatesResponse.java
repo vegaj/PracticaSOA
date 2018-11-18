@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for findRange complex type.
+ * <p>Java class for findVinietasBetweenDatesResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="findRange">
+ * &lt;complexType name="findVinietasBetweenDatesResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="range" type="{http://www.w3.org/2001/XMLSchema}int" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://ws/}vinieta" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,41 +29,41 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "findRange", propOrder = {
-    "range"
+@XmlType(name = "findVinietasBetweenDatesResponse", propOrder = {
+    "_return"
 })
-public class FindRange {
+public class FindVinietasBetweenDatesResponse {
 
-    @XmlElement(nillable = true)
-    protected List<Integer> range;
+    @XmlElement(name = "return")
+    protected List<Vinieta> _return;
 
     /**
-     * Gets the value of the range property.
+     * Gets the value of the return property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the range property.
+     * This is why there is not a <CODE>set</CODE> method for the return property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getRange().add(newItem);
+     *    getReturn().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Integer }
+     * {@link Vinieta }
      * 
      * 
      */
-    public List<Integer> getRange() {
-        if (range == null) {
-            range = new ArrayList<Integer>();
+    public List<Vinieta> getReturn() {
+        if (_return == null) {
+            _return = new ArrayList<Vinieta>();
         }
-        return this.range;
+        return this._return;
     }
 
 }

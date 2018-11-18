@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for find complex type.
+ * <p>Java class for removeVinieta complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="find">
+ * &lt;complexType name="removeVinieta">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="id" type="{http://www.w3.org/2001/XMLSchema}anyType" minOccurs="0"/>
+ *         &lt;element name="entity" type="{http://ws/}vinieta" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -26,35 +26,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "find", propOrder = {
-    "id"
+@XmlType(name = "removeVinieta", propOrder = {
+    "entity"
 })
-public class Find {
+public class RemoveVinieta {
 
-    protected Object id;
+    protected Vinieta entity;
 
     /**
-     * Gets the value of the id property.
+     * Gets the value of the entity property.
      * 
      * @return
      *     possible object is
-     *     {@link Object }
+     *     {@link Vinieta }
      *     
      */
-    public Object getId() {
-        return id;
+    public Vinieta getEntity() {
+        return entity;
     }
 
     /**
-     * Sets the value of the id property.
+     * Sets the value of the entity property.
      * 
      * @param value
      *     allowed object is
-     *     {@link Object }
+     *     {@link Vinieta }
      *     
      */
-    public void setId(Object value) {
-        this.id = value;
+    public void setEntity(Vinieta value) {
+        this.entity = value;
     }
 
 }
