@@ -9,7 +9,9 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import jpa.Serie;
+import jpa.Vinieta;
 
 /**
  *
@@ -29,22 +31,43 @@ public class SerieFacade extends AbstractFacade<Serie> {
     public SerieFacade() {
         super(Serie.class);
     }
-
+        
     /**
      * @return a list with all the different authors
-     * MAngeles
      */
     public List<String> authors(){
-        throw new UnsupportedOperationException("Not implemented yet");    
+        TypedQuery tq = em.createQuery("SELECT DISTINCT S.autor FROM Serie S ORDER BY S.autor ASC", Serie.class);
+        return tq.getResultList();      
     }
     
     /**
-     * 
      * @param name
      * @return a list of series with the given name in it.
-     * MAngeles
      */
     public List<Serie> searchSerieByName(String name) {
-        throw new UnsupportedOperationException("Not implemented yet");
+        if(name == null){
+            throw new RuntimeException("Null name");
+        }
+        List<Serie> result;
+        
+        TypedQuery tq = em.createQuery("SELECT s FROM Serie S WHERE s.nombre = :name", Serie.class);
+        tq.setParameter("name", name);
+        result = tq.getResultList();
+        return result;        
     }
+    
+    public List<String> findByAutor(String author){
+        if(author == null){
+            throw new RuntimeException("Null author");
+        }
+        
+        List<String> result;
+        String autor = '%' + author + '%';
+        
+        TypedQuery tq = em.createQuery("SELECT s.nombre FROM Serie S WHERE s.autor LIKE :autor", Serie.class);
+        tq.setParameter("autor", autor);
+        result = tq.getResultList();
+        return result;
+    }
+    
 }

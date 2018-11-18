@@ -15,6 +15,7 @@ import javax.jws.Oneway;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import jpa.Serie;
+import static jpa.Serie_.autor;
 import jpa.Vinieta;
 import session.SerieFacade;
 import session.VinietaFacade;
@@ -81,22 +82,16 @@ public class ComicWS {
 
     /**
      * Web service operation
-     * MAngeles
-     */
-    
-    @WebMethod(operationName = "findAutores")
-    public List<String> findAutores() {
-        throw new UnsupportedOperationException("Not implemented yet");
-    }
-
-    /**
-     * Web service operation
-     * MAngeles
-     * Buscar las series de un autor en concreto, con paginación de 10 en 10
+     * Buscar las series de un autor en concreto
      */
     @WebMethod(operationName = "searchSerieByAutor")
-    public List<Serie> searchSerieByAutor(@WebParam(name="autor") final String aut) {
-        throw new UnsupportedOperationException("Not implemented yet");
+    public List<String> searchSerieByAutor(@WebParam(name = "autor") final String autor) {
+        return serieFacade.findByAutor(String.valueOf(autor));
+    }
+    
+    @WebMethod(operationName = "searchSerieByName")
+    public List<Serie> searchSerieByName(@WebParam(name = "nombre") final String nombre) {
+        return serieFacade.searchSerieByName(String.valueOf(nombre));
     }
     
     @WebMethod(operationName = "createVinieta")
@@ -193,4 +188,22 @@ public class ComicWS {
         return vinietaFacade.latestVinietas(10);
     }
    
+    /**
+     * @return Athors from system. Not duplicated values.
+     */
+    @WebMethod(operationName = "findAutores")
+    public List<String> findAutores() {
+        return serieFacade.authors();
+    }
+    
+    /*
+    * searhVinietasBySerie(Integer idSerie)
+    * Método que relaciona las dos tablas Serie y Vinieta
+    * @return Listado de viñetas de una determinada serie con "idSerie"
+    */
+    @WebMethod(operationName = "searchVinietaBySerie")
+    public List<Vinieta> searchVinietaBySerie(@WebParam(name = "idSerie") final String idSerie) throws IllegalArgumentException{
+        return vinietaFacade.findBySerie(Integer.valueOf(idSerie));            
+    }
+            
 }
