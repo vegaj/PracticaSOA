@@ -19,7 +19,8 @@
                 <h:inputText value="#{seriesBean.vinietaEditada.fecha}"/> <br/><br/>
                 <h:outputLabel value="Puntuacion: "/>
                 <h:inputText value="#{seriesBean.vinietaEditada.puntuacion}"/> <br/><br/>
-                <!-- FALTA ASIGNAR LA VIÑETA A UNA SERIE -->
+                <h:outputLabel value="Serie: "/>
+                <h:inputText value="#{seriesBean.vinietaEditada.idserie.nombre}"/> <br/><br/>
                 <h:commandButton action="#{seriesBean.guardarVinieta()}" value="Editar" />
             </h:form>
         </f:view>
