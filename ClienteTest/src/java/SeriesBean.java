@@ -25,7 +25,7 @@ public class SeriesBean implements Serializable {
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/ComicWS/ComicWS.wsdl")
     private ComicWS_Service service;
 
-    /* VARIABLES */
+    /* VARIABLES SERIE */
     private Serie serie;
     private List<Serie> series;
     private Serie serieEditada;
@@ -37,10 +37,14 @@ public class SeriesBean implements Serializable {
     private Integer min; //minimo del rango de findRange
     private Integer max; //maximo del rango de findRange
     private String autor; //para buscar las series por autor
+    
+    /* VARIABLES VINIETAS */
+    private Vinieta vinieta;
+    private Vinieta vinietaEditada;
+    private List<Vinieta> vinietas;
     private String fecha; //fecha para buscar las viñetas
     private String fechaMin; //fecha minima para buscar viñetas entre dos fechas
     private String fechaMax; //fecha minima para buscar viñetas entre dos fechas
-    private List<Vinieta> vinietas;
 
     /**
      * Creates a new instance of SeriesBean
@@ -174,6 +178,22 @@ public class SeriesBean implements Serializable {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
+
+    public Vinieta getVinieta() {
+        return vinieta;
+    }
+
+    public void setVinieta(Vinieta vinieta) {
+        this.vinieta = vinieta;
+    }
+
+    public Vinieta getVinietaEditada() {
+        return vinietaEditada;
+    }
+
+    public void setVinietaEditada(Vinieta vinietaEditada) {
+        this.vinietaEditada = vinietaEditada;
+    }
     
     /* METODOS PARA PROBAR LOS SERVICIOS */
     
@@ -264,6 +284,26 @@ public class SeriesBean implements Serializable {
     public String buscarVinietasByFecha(){
         vinietas = findVinietasByDate(fecha);
         return "listadoVinietas.xhtml";
+    }
+    
+    public String nuevaVinieta(){
+        return "nuevaVinieta.xhtml";
+    }
+    
+    public String crearVinieta(){
+        createVinieta(vinieta);
+        vinieta = new Vinieta();
+        return "index.xhtml";
+    }
+    
+     public String editarVinieta(Vinieta v) {
+        vinietaEditada = v;
+        return "editarVinieta.xhtml";
+    }
+
+    public String guardarVinieta() {
+        editVinieta(vinietaEditada);
+        return "index.xhtml";
     }
 
     /* OPERACIONES DE LOS SERVICIOS */
