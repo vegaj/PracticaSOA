@@ -3,21 +3,20 @@ package ws;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for findResponse complex type.
+ * <p>Java class for editSerie complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="findResponse">
+ * &lt;complexType name="editSerie">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://ws/}serie" minOccurs="0"/>
+ *         &lt;element name="entity" type="{http://ws/}serie" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,36 +26,35 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "findResponse", propOrder = {
-    "_return"
+@XmlType(name = "editSerie", propOrder = {
+    "entity"
 })
-public class FindResponse {
+public class EditSerie {
 
-    @XmlElement(name = "return")
-    protected Serie _return;
+    protected Serie entity;
 
     /**
-     * Gets the value of the return property.
+     * Gets the value of the entity property.
      * 
      * @return
      *     possible object is
      *     {@link Serie }
      *     
      */
-    public Serie getReturn() {
-        return _return;
+    public Serie getEntity() {
+        return entity;
     }
 
     /**
-     * Sets the value of the return property.
+     * Sets the value of the entity property.
      * 
      * @param value
      *     allowed object is
      *     {@link Serie }
      *     
      */
-    public void setReturn(Serie value) {
-        this._return = value;
+    public void setEntity(Serie value) {
+        this.entity = value;
     }
 
 }

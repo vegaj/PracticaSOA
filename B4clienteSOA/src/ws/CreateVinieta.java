@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for remove complex type.
+ * <p>Java class for createVinieta complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="remove">
+ * &lt;complexType name="createVinieta">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="entity" type="{http://ws/}serie" minOccurs="0"/>
+ *         &lt;element name="entity" type="{http://ws/}vinieta" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -26,22 +26,22 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "remove", propOrder = {
+@XmlType(name = "createVinieta", propOrder = {
     "entity"
 })
-public class Remove {
+public class CreateVinieta {
 
-    protected Serie entity;
+    protected Vinieta entity;
 
     /**
      * Gets the value of the entity property.
      * 
      * @return
      *     possible object is
-     *     {@link Serie }
+     *     {@link Vinieta }
      *     
      */
-    public Serie getEntity() {
+    public Vinieta getEntity() {
         return entity;
     }
 
@@ -50,10 +50,10 @@ public class Remove {
      * 
      * @param value
      *     allowed object is
-     *     {@link Serie }
+     *     {@link Vinieta }
      *     
      */
-    public void setEntity(Serie value) {
+    public void setEntity(Vinieta value) {
         this.entity = value;
     }
 
