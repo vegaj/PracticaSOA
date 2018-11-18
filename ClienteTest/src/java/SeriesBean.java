@@ -55,7 +55,7 @@ public class SeriesBean implements Serializable {
     @PostConstruct
     public void init() {
         this.serie = new Serie();
-        this.autores = findAutores();
+        //this.autores = findAutores();
     }
 
     /* GETTERS AND SETTERS */
