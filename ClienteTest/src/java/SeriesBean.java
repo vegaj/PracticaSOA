@@ -36,7 +36,6 @@ public class SeriesBean implements Serializable {
     private List<Integer> rango; //rango de findRange
     private Integer min; //minimo del rango de findRange
     private Integer max; //maximo del rango de findRange
-    private String autor; //para buscar las series por autor
     
     /* VARIABLES VINIETAS */
     private Vinieta vinieta;
@@ -143,14 +142,6 @@ public class SeriesBean implements Serializable {
 
     public void setMax(Integer max) {
         this.max = max;
-    }
-
-    public String getAutor() {
-        return autor;
-    }
-
-    public void setAutor(String autor) {
-        this.autor = autor;
     }
 
     public String getFechaMin() {
@@ -322,11 +313,6 @@ public class SeriesBean implements Serializable {
         rango.add(min);
         rango.add(max);
         series = findRangeSeries(rango);
-        return "listadoSeries.xhtml";
-    }
-    
-    public String buscarSeriesByAutor(){
-        series = searchSerieByAutor(autor);
         return "listadoSeries.xhtml";
     }
     

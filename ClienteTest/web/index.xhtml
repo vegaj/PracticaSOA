@@ -34,10 +34,6 @@
             <h:commandButton action="#{seriesBean.buscarSerieRango()}" value="Buscar por rango" /><br/><br/> 
 
             <h:outputLabel value="Buscar series de un autor: "/><br/>
-            <h:outputLabel value="Introducir el nombre del autor: "/>
-            <h:inputText value="#{seriesBean.autor}"/>
-            <h:commandButton action="#{seriesBean.buscarSeriesByAutor()}" value="Buscar series"/><br/><br/> 
-
             <h:outputLabel value="Seleccionar autor: "/>
             <h:selectOneMenu value="#{seriesBean.autorSeleccionado}">
                 <f:selectItems value="#{seriesBean.autores}" var="autor" itemLabel="#{autor}" itemValue="#{autor}" />                    
