@@ -29,8 +29,18 @@ public class SeriesBean implements Serializable {
     private Serie serie;
     private List<Serie> series;
     private Serie serieEditada;
+    private Integer idBuscar;
+    private Serie serieBuscada;
     private String autorSeleccionado;
     private List<String> autores;
+    private List<Integer> rango; //rango de findRange
+    private Integer min; //minimo del rango de findRange
+    private Integer max; //maximo del rango de findRange
+    private String autor; //para buscar las series por autor
+    private String fecha; //fecha para buscar las viñetas
+    private String fechaMin; //fecha minima para buscar viñetas entre dos fechas
+    private String fechaMax; //fecha minima para buscar viñetas entre dos fechas
+    private List<Vinieta> vinietas;
 
     /**
      * Creates a new instance of SeriesBean
@@ -85,7 +95,88 @@ public class SeriesBean implements Serializable {
         this.serieEditada = serieEditada;
     }
 
+    public Serie getSerieBuscada() {
+        return serieBuscada;
+    }
+
+    public void setSerieBuscada(Serie serieBuscada) {
+        this.serieBuscada = serieBuscada;
+    }
+
+    public Integer getIdBuscar() {
+        return idBuscar;
+    }
+
+    public void setIdBuscar(Integer idBuscar) {
+        this.idBuscar = idBuscar;
+    }
+
+    public List<Integer> getRango() {
+        return rango;
+    }
+
+    public void setRango(List<Integer> rango) {
+        this.rango = rango;
+    }
+
+    public Integer getMin() {
+        return min;
+    }
+
+    public void setMin(Integer min) {
+        this.min = min;
+    }
+
+    public Integer getMax() {
+        return max;
+    }
+
+    public void setMax(Integer max) {
+        this.max = max;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getFechaMin() {
+        return fechaMin;
+    }
+
+    public void setFechaMin(String fechaMin) {
+        this.fechaMin = fechaMin;
+    }
+
+    public String getFechaMax() {
+        return fechaMax;
+    }
+
+    public void setFechaMax(String fechaMax) {
+        this.fechaMax = fechaMax;
+    }
+
+    public List<Vinieta> getVinietas() {
+        return vinietas;
+    }
+
+    public void setVinietas(List<Vinieta> vinietas) {
+        this.vinietas = vinietas;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+    
     /* METODOS PARA PROBAR LOS SERVICIOS */
+    
     public String nuevaSerie() {
         //redirige al formulario para introducir los datos de la serie
         return "nuevaSerie.xhtml";
@@ -136,6 +227,43 @@ public class SeriesBean implements Serializable {
 
     public Integer contar() {
         return countSeries();
+    }
+    
+    public String buscarSeriePorId(){
+        String res = null;
+        if(idBuscar > 0){
+            serieBuscada = findSerie(idBuscar);
+            if(serieBuscada != null){
+                res = "mostrarSerieBuscada.xhtml";
+            }else{
+                res = "index.xhtml";
+            }
+        }else{
+            res = "index.xhtml";
+        }
+        return res;
+    }
+    
+    public String buscarSerieRango(){
+        rango.add(min);
+        rango.add(max);
+        series = findRangeSeries(rango);
+        return "listadoSeries.xhtml";
+    }
+    
+    public String buscarSeriesByAutor(){
+        series = searchSerieByAutor(autor);
+        return "listadoSeries.xhtml";
+    }
+    
+    public String buscarVinietasEntreFechas(){
+        vinietas = findVinietasBetweenDates(fechaMin, fechaMax);
+        return "listadoVinietas.xhtml";
+    }
+       
+    public String buscarVinietasByFecha(){
+        vinietas = findVinietasByDate(fecha);
+        return "listadoVinietas.xhtml";
     }
 
     /* OPERACIONES DE LOS SERVICIOS */
