@@ -45,6 +45,12 @@ public class SeriesBean implements Serializable {
     private String fecha; //fecha para buscar las viñetas
     private String fechaMin; //fecha minima para buscar viñetas entre dos fechas
     private String fechaMax; //fecha minima para buscar viñetas entre dos fechas
+    private Integer serieBuscaVin;
+    private List<Integer> rangoV; //rango de findRange
+    private Integer minV; //minimo del rango de findRange
+    private Integer maxV; //maximo del rango de findRange
+    private Vinieta vinietaBuscada;
+    private Integer idBuscarV;
 
     /**
      * Creates a new instance of SeriesBean
@@ -194,6 +200,54 @@ public class SeriesBean implements Serializable {
     public void setVinietaEditada(Vinieta vinietaEditada) {
         this.vinietaEditada = vinietaEditada;
     }
+
+    public Integer getSerieBuscaVin() {
+        return serieBuscaVin;
+    }
+
+    public void setSerieBuscaVin(Integer serieBuscaVin) {
+        this.serieBuscaVin = serieBuscaVin;
+    }
+
+    public Integer getMinV() {
+        return minV;
+    }
+
+    public void setMinV(Integer minV) {
+        this.minV = minV;
+    }
+
+    public Integer getMaxV() {
+        return maxV;
+    }
+
+    public void setMaxV(Integer maxV) {
+        this.maxV = maxV;
+    }
+
+    public List<Integer> getRangoV() {
+        return rangoV;
+    }
+
+    public void setRangoV(List<Integer> rangoV) {
+        this.rangoV = rangoV;
+    }
+
+    public Vinieta getVinietaBuscada() {
+        return vinietaBuscada;
+    }
+
+    public void setVinietaBuscada(Vinieta vinietaBuscada) {
+        this.vinietaBuscada = vinietaBuscada;
+    }
+
+    public Integer getIdBuscarV() {
+        return idBuscarV;
+    }
+
+    public void setIdBuscarV(Integer idBuscarV) {
+        this.idBuscarV = idBuscarV;
+    }
     
     /* METODOS PARA PROBAR LOS SERVICIOS */
     
@@ -304,6 +358,42 @@ public class SeriesBean implements Serializable {
     public String guardarVinieta() {
         editVinieta(vinietaEditada);
         return "index.xhtml";
+    }
+    
+    public String buscarVinietaPorId(){
+        String res = null;
+        if(idBuscarV > 0){
+            vinietaBuscada = findVinieta(idBuscarV);
+            if(vinietaBuscada != null){
+                res = "mostrarVinietaBuscada.xhtml";
+            }else{
+                res = "index.xhtml";
+            }
+        }else{
+            res = "index.xhtml";
+        }
+        return res;
+    }
+    
+    public String buscarVinietaRango(){
+        rangoV.add(minV);
+        rangoV.add(maxV);
+        vinietas = findRangeVinietas(rangoV);
+        return "listadoVinietas.xhtml";
+    }
+    
+    public String mostrarVinieta(){
+        vinietas = findAllVinietas();
+        return "listadoVinietas.xhtml";
+    }
+    
+    public String borrarVinieta(Vinieta v){
+        removeVinieta(v);
+        return "index.xhtml";
+    }
+    
+    public String buscarVinietasBySerie(){
+        return "mostrarVinietaBuscada.xhtml";
     }
 
     /* OPERACIONES DE LOS SERVICIOS */
