@@ -11,42 +11,61 @@
         <h:form>
             <h:outputLabel value="Crear una nueva serie: " />
             <h:commandButton action="#{seriesBean.nuevaSerie()}" value="Nueva serie"/> <br/><br/>
-            
+
             <h:outputLabel value="Listado de series: " />
-            <h:commandButton action="#{seriesBean.mostrarSeries()}" value="Mostrar serie"/> <br/><br/> 
-            
+            <h:commandButton action="#{seriesBean.mostrarSeries()}" value="Mostrar series"/> <br/><br/> 
+
             <h:outputLabel value="Buscar serie por id(introducir el id de la serie): "/>
             <h:commandButton action="#{seriesBean.buscarSeriePorId()}" value="Buscar por ID" /><br/><br/> 
-            
+
             <h:outputLabel value="Buscar series por rango (findRangeSeries): "/><br/>
             <h:outputLabel value="Introducir mínimo del rango: "/>
             <h:inputText value="#{seriesBean.min}"/>
             <h:outputLabel value="Introducir maximo del rango: "/>
             <h:inputText value="#{seriesBean.max}"/>
             <h:commandButton action="#{seriesBean.buscarSerieRango()}" value="Buscar por rango" /><br/><br/> 
-            
+
             <h:outputLabel value="Buscar series de un autor: "/><br/>
             <h:outputLabel value="Introducir el nombre del autor: "/>
             <h:inputText value="#{seriesBean.autor}"/>
             <h:commandButton action="#{seriesBean.buscarSeriesByAutor()}" value="Buscar series"/>
+
+            <h:outputLabel value="Seleccionar autor: "/>
+            <h:selectOneMenu value="#{seriesBean.autorSeleccionado}">
+                <f:selectItems value="#{seriesBean.autores}" var="autor" itemLabel="#{autor}" itemValue="#{autor}" />                    
+            </h:selectOneMenu>
+            <h:commandButton action="#{seriesBean.buscarAutor()}" value="Ver series" />
+        </h:form>
+
+        <b>Viñetas</b><br/>
+        <h:form>
+            <h:outputLabel value="Crear una nueva viñeta: " />
+            <h:commandButton action="#{seriesBean.nuevaVinieta()}" value="Nueva viñeta"/> <br/><br/>
+
+            <h:outputLabel value="Listado de viñetas: " />
+            <h:commandButton action="#{seriesBean.mostrarVinieta()}" value="Mostrar viñetas"/> <br/><br/> 
+
+            <h:outputLabel value="Buscar viñeta por id(introducir el id de la viñeta): "/>
+            <h:commandButton action="#{seriesBean.buscarVinietaPorId()}" value="Buscar por ID" /><br/><br/> 
+
+            <h:outputLabel value="Buscar viñeta por rango (findRangeVinieta): "/><br/>
+            <h:outputLabel value="Introducir mínimo del rango: "/>
+            <h:inputText value="#{seriesBean.minV}"/>
+            <h:outputLabel value="Introducir maximo del rango: "/>
+            <h:inputText value="#{seriesBean.maxV}"/>
+            <h:commandButton action="#{seriesBean.buscarVinietaRango()}" value="Buscar por rango" /><br/><br/> 
             
             <h:outputLabel value="Buscar viñetas de una serie: "/><br/>
             <h:outputLabel value="Introducir el nombre de la serie: "/>
             <h:inputText value="#{seriesBean.serieBuscaVin}"/>
             <h:commandButton action="#{seriesBean.buscarVinietasBySerie()}" value="Buscar viñetas"/>
-            
+
             <h:outputLabel value="Buscar viñetas entre dos fechas: "/><br/>
             <h:outputLabel value="Introducir la fecha mínima: "/>
             <h:inputText value="#{seriesBean.fechaMin}"/>
             <h:outputLabel value="Introducir la fecha máxima: "/>
             <h:inputText value="#{seriesBean.fechaMax}"/>
             <h:commandButton action="#{seriesBean.buscarVinietasEntreFechas()}" value="Buscar Viñetas" /><br/><br/> 
-            
-            <h:outputLabel value="Seleccionar autor: "/>
-            <h:selectOneMenu value="#{seriesBean.autorSeleccionado}">
-                <f:selectItems value="#{seriesBean.autores}" var="autor" itemLabel="#{autor}" itemValue="#{autor}" />                    
-            </h:selectOneMenu>
-            <h:commandButton action="#{seriesBean.buscarAutor()}" value="Ver series" />
         </h:form>
     </h:body>
 </html>
