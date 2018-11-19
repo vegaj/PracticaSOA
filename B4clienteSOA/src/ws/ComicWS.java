@@ -28,6 +28,78 @@ public interface ComicWS {
 
     /**
      * 
+     * @param date
+     * @return
+     *     returns java.util.List<ws.Vinieta>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findVinietasByDate", targetNamespace = "http://ws/", className = "ws.FindVinietasByDate")
+    @ResponseWrapper(localName = "findVinietasByDateResponse", targetNamespace = "http://ws/", className = "ws.FindVinietasByDateResponse")
+    @Action(input = "http://ws/ComicWS/findVinietasByDateRequest", output = "http://ws/ComicWS/findVinietasByDateResponse")
+    public List<Vinieta> findVinietasByDate(
+        @WebParam(name = "date", targetNamespace = "")
+        String date);
+
+    /**
+     * 
+     * @param autor
+     * @return
+     *     returns java.util.List<java.lang.String>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "searchSerieByAutor", targetNamespace = "http://ws/", className = "ws.SearchSerieByAutor")
+    @ResponseWrapper(localName = "searchSerieByAutorResponse", targetNamespace = "http://ws/", className = "ws.SearchSerieByAutorResponse")
+    @Action(input = "http://ws/ComicWS/searchSerieByAutorRequest", output = "http://ws/ComicWS/searchSerieByAutorResponse")
+    public List<String> searchSerieByAutor(
+        @WebParam(name = "autor", targetNamespace = "")
+        String autor);
+
+    /**
+     * 
+     * @param serie
+     * @return
+     *     returns java.util.List<ws.Vinieta>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "searchVinietaBySerie", targetNamespace = "http://ws/", className = "ws.SearchVinietaBySerie")
+    @ResponseWrapper(localName = "searchVinietaBySerieResponse", targetNamespace = "http://ws/", className = "ws.SearchVinietaBySerieResponse")
+    @Action(input = "http://ws/ComicWS/searchVinietaBySerieRequest", output = "http://ws/ComicWS/searchVinietaBySerieResponse")
+    public List<Vinieta> searchVinietaBySerie(
+        @WebParam(name = "serie", targetNamespace = "")
+        Object serie);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<ws.Vinieta>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "top5Vinietas", targetNamespace = "http://ws/", className = "ws.Top5Vinietas")
+    @ResponseWrapper(localName = "top5VinietasResponse", targetNamespace = "http://ws/", className = "ws.Top5VinietasResponse")
+    @Action(input = "http://ws/ComicWS/top5VinietasRequest", output = "http://ws/ComicWS/top5VinietasResponse")
+    public List<Vinieta> top5Vinietas();
+
+    /**
+     * 
+     * @param nombre
+     * @return
+     *     returns java.util.List<ws.Serie>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "searchSerieByName", targetNamespace = "http://ws/", className = "ws.SearchSerieByName")
+    @ResponseWrapper(localName = "searchSerieByNameResponse", targetNamespace = "http://ws/", className = "ws.SearchSerieByNameResponse")
+    @Action(input = "http://ws/ComicWS/searchSerieByNameRequest", output = "http://ws/ComicWS/searchSerieByNameResponse")
+    public List<Serie> searchSerieByName(
+        @WebParam(name = "nombre", targetNamespace = "")
+        String nombre);
+
+    /**
+     * 
      * @param from
      * @param to
      * @return
@@ -46,33 +118,6 @@ public interface ComicWS {
 
     /**
      * 
-     * @param autor
-     * @return
-     *     returns java.util.List<ws.Serie>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "searchSerieByAutor", targetNamespace = "http://ws/", className = "ws.SearchSerieByAutor")
-    @ResponseWrapper(localName = "searchSerieByAutorResponse", targetNamespace = "http://ws/", className = "ws.SearchSerieByAutorResponse")
-    @Action(input = "http://ws/ComicWS/searchSerieByAutorRequest", output = "http://ws/ComicWS/searchSerieByAutorResponse")
-    public List<Serie> searchSerieByAutor(
-        @WebParam(name = "autor", targetNamespace = "")
-        String autor);
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<ws.Vinieta>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "top5Vinietas", targetNamespace = "http://ws/", className = "ws.Top5Vinietas")
-    @ResponseWrapper(localName = "top5VinietasResponse", targetNamespace = "http://ws/", className = "ws.Top5VinietasResponse")
-    @Action(input = "http://ws/ComicWS/top5VinietasRequest", output = "http://ws/ComicWS/top5VinietasResponse")
-    public List<Vinieta> top5Vinietas();
-
-    /**
-     * 
      * @param range
      * @return
      *     returns java.util.List<ws.Vinieta>
@@ -88,81 +133,27 @@ public interface ComicWS {
 
     /**
      * 
-     * @param date
      * @return
      *     returns java.util.List<ws.Vinieta>
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "findVinietasByDate", targetNamespace = "http://ws/", className = "ws.FindVinietasByDate")
-    @ResponseWrapper(localName = "findVinietasByDateResponse", targetNamespace = "http://ws/", className = "ws.FindVinietasByDateResponse")
-    @Action(input = "http://ws/ComicWS/findVinietasByDateRequest", output = "http://ws/ComicWS/findVinietasByDateResponse")
-    public List<Vinieta> findVinietasByDate(
-        @WebParam(name = "date", targetNamespace = "")
-        String date);
+    @RequestWrapper(localName = "ultimasVinietas", targetNamespace = "http://ws/", className = "ws.UltimasVinietas")
+    @ResponseWrapper(localName = "ultimasVinietasResponse", targetNamespace = "http://ws/", className = "ws.UltimasVinietasResponse")
+    @Action(input = "http://ws/ComicWS/ultimasVinietasRequest", output = "http://ws/ComicWS/ultimasVinietasResponse")
+    public List<Vinieta> ultimasVinietas();
 
     /**
      * 
      * @return
-     *     returns int
+     *     returns java.util.List<java.lang.String>
      */
     @WebMethod
     @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "countSeries", targetNamespace = "http://ws/", className = "ws.CountSeries")
-    @ResponseWrapper(localName = "countSeriesResponse", targetNamespace = "http://ws/", className = "ws.CountSeriesResponse")
-    @Action(input = "http://ws/ComicWS/countSeriesRequest", output = "http://ws/ComicWS/countSeriesResponse")
-    public int countSeries();
-
-    /**
-     * 
-     * @param range
-     * @return
-     *     returns java.util.List<ws.Serie>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "findRangeSeries", targetNamespace = "http://ws/", className = "ws.FindRangeSeries")
-    @ResponseWrapper(localName = "findRangeSeriesResponse", targetNamespace = "http://ws/", className = "ws.FindRangeSeriesResponse")
-    @Action(input = "http://ws/ComicWS/findRangeSeriesRequest", output = "http://ws/ComicWS/findRangeSeriesResponse")
-    public List<Serie> findRangeSeries(
-        @WebParam(name = "range", targetNamespace = "")
-        List<Integer> range);
-
-    /**
-     * 
-     * @param entity
-     */
-    @WebMethod
-    @Oneway
-    @RequestWrapper(localName = "editVinieta", targetNamespace = "http://ws/", className = "ws.EditVinieta")
-    @Action(input = "http://ws/ComicWS/editVinieta")
-    public void editVinieta(
-        @WebParam(name = "entity", targetNamespace = "")
-        Vinieta entity);
-
-    /**
-     * 
-     * @return
-     *     returns int
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "countVinietas", targetNamespace = "http://ws/", className = "ws.CountVinietas")
-    @ResponseWrapper(localName = "countVinietasResponse", targetNamespace = "http://ws/", className = "ws.CountVinietasResponse")
-    @Action(input = "http://ws/ComicWS/countVinietasRequest", output = "http://ws/ComicWS/countVinietasResponse")
-    public int countVinietas();
-
-    /**
-     * 
-     * @param entity
-     */
-    @WebMethod
-    @Oneway
-    @RequestWrapper(localName = "editSerie", targetNamespace = "http://ws/", className = "ws.EditSerie")
-    @Action(input = "http://ws/ComicWS/editSerie")
-    public void editSerie(
-        @WebParam(name = "entity", targetNamespace = "")
-        Serie entity);
+    @RequestWrapper(localName = "findAutores", targetNamespace = "http://ws/", className = "ws.FindAutores")
+    @ResponseWrapper(localName = "findAutoresResponse", targetNamespace = "http://ws/", className = "ws.FindAutoresResponse")
+    @Action(input = "http://ws/ComicWS/findAutoresRequest", output = "http://ws/ComicWS/findAutoresResponse")
+    public List<String> findAutores();
 
     /**
      * 
@@ -185,11 +176,26 @@ public interface ComicWS {
      */
     @WebMethod
     @Oneway
-    @RequestWrapper(localName = "removeVinieta", targetNamespace = "http://ws/", className = "ws.RemoveVinieta")
-    @Action(input = "http://ws/ComicWS/removeVinieta")
-    public void removeVinieta(
+    @RequestWrapper(localName = "removeSerie", targetNamespace = "http://ws/", className = "ws.RemoveSerie")
+    @Action(input = "http://ws/ComicWS/removeSerie")
+    public void removeSerie(
         @WebParam(name = "entity", targetNamespace = "")
-        Vinieta entity);
+        Serie entity);
+
+    /**
+     * 
+     * @param range
+     * @return
+     *     returns java.util.List<ws.Serie>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findRangeSeries", targetNamespace = "http://ws/", className = "ws.FindRangeSeries")
+    @ResponseWrapper(localName = "findRangeSeriesResponse", targetNamespace = "http://ws/", className = "ws.FindRangeSeriesResponse")
+    @Action(input = "http://ws/ComicWS/findRangeSeriesRequest", output = "http://ws/ComicWS/findRangeSeriesResponse")
+    public List<Serie> findRangeSeries(
+        @WebParam(name = "range", targetNamespace = "")
+        List<Integer> range);
 
     /**
      * 
@@ -197,11 +203,107 @@ public interface ComicWS {
      */
     @WebMethod
     @Oneway
-    @RequestWrapper(localName = "removeSerie", targetNamespace = "http://ws/", className = "ws.RemoveSerie")
-    @Action(input = "http://ws/ComicWS/removeSerie")
-    public void removeSerie(
+    @RequestWrapper(localName = "editSerie", targetNamespace = "http://ws/", className = "ws.EditSerie")
+    @Action(input = "http://ws/ComicWS/editSerie")
+    public void editSerie(
         @WebParam(name = "entity", targetNamespace = "")
         Serie entity);
+
+    /**
+     * 
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "countSeries", targetNamespace = "http://ws/", className = "ws.CountSeries")
+    @ResponseWrapper(localName = "countSeriesResponse", targetNamespace = "http://ws/", className = "ws.CountSeriesResponse")
+    @Action(input = "http://ws/ComicWS/countSeriesRequest", output = "http://ws/ComicWS/countSeriesResponse")
+    public int countSeries();
+
+    /**
+     * 
+     * @param entity
+     */
+    @WebMethod
+    @Oneway
+    @RequestWrapper(localName = "createVinieta", targetNamespace = "http://ws/", className = "ws.CreateVinieta")
+    @Action(input = "http://ws/ComicWS/createVinieta")
+    public void createVinieta(
+        @WebParam(name = "entity", targetNamespace = "")
+        Vinieta entity);
+
+    /**
+     * 
+     * @return
+     *     returns int
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "countVinietas", targetNamespace = "http://ws/", className = "ws.CountVinietas")
+    @ResponseWrapper(localName = "countVinietasResponse", targetNamespace = "http://ws/", className = "ws.CountVinietasResponse")
+    @Action(input = "http://ws/ComicWS/countVinietasRequest", output = "http://ws/ComicWS/countVinietasResponse")
+    public int countVinietas();
+
+    /**
+     * 
+     * @param entity
+     */
+    @WebMethod
+    @Oneway
+    @RequestWrapper(localName = "editVinieta", targetNamespace = "http://ws/", className = "ws.EditVinieta")
+    @Action(input = "http://ws/ComicWS/editVinieta")
+    public void editVinieta(
+        @WebParam(name = "entity", targetNamespace = "")
+        Vinieta entity);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<ws.Vinieta>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "findAllVinietas", targetNamespace = "http://ws/", className = "ws.FindAllVinietas")
+    @ResponseWrapper(localName = "findAllVinietasResponse", targetNamespace = "http://ws/", className = "ws.FindAllVinietasResponse")
+    @Action(input = "http://ws/ComicWS/findAllVinietasRequest", output = "http://ws/ComicWS/findAllVinietasResponse")
+    public List<Vinieta> findAllVinietas();
+
+    /**
+     * 
+     * @param entity
+     */
+    @WebMethod
+    @Oneway
+    @RequestWrapper(localName = "createSerie", targetNamespace = "http://ws/", className = "ws.CreateSerie")
+    @Action(input = "http://ws/ComicWS/createSerie")
+    public void createSerie(
+        @WebParam(name = "entity", targetNamespace = "")
+        Serie entity);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<ws.Serie>
+     */
+    @WebMethod
+    @WebResult(targetNamespace = "")
+    @RequestWrapper(localName = "topFiveSeries", targetNamespace = "http://ws/", className = "ws.TopFiveSeries")
+    @ResponseWrapper(localName = "topFiveSeriesResponse", targetNamespace = "http://ws/", className = "ws.TopFiveSeriesResponse")
+    @Action(input = "http://ws/ComicWS/topFiveSeriesRequest", output = "http://ws/ComicWS/topFiveSeriesResponse")
+    public List<Serie> topFiveSeries();
+
+    /**
+     * 
+     * @param entity
+     */
+    @WebMethod
+    @Oneway
+    @RequestWrapper(localName = "removeVinieta", targetNamespace = "http://ws/", className = "ws.RemoveVinieta")
+    @Action(input = "http://ws/ComicWS/removeVinieta")
+    public void removeVinieta(
+        @WebParam(name = "entity", targetNamespace = "")
+        Vinieta entity);
 
     /**
      * 
@@ -229,77 +331,5 @@ public interface ComicWS {
     @ResponseWrapper(localName = "findAllSeriesResponse", targetNamespace = "http://ws/", className = "ws.FindAllSeriesResponse")
     @Action(input = "http://ws/ComicWS/findAllSeriesRequest", output = "http://ws/ComicWS/findAllSeriesResponse")
     public List<Serie> findAllSeries();
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<ws.Vinieta>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "findAllVinietas", targetNamespace = "http://ws/", className = "ws.FindAllVinietas")
-    @ResponseWrapper(localName = "findAllVinietasResponse", targetNamespace = "http://ws/", className = "ws.FindAllVinietasResponse")
-    @Action(input = "http://ws/ComicWS/findAllVinietasRequest", output = "http://ws/ComicWS/findAllVinietasResponse")
-    public List<Vinieta> findAllVinietas();
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<ws.Vinieta>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "ultimasVinietas", targetNamespace = "http://ws/", className = "ws.UltimasVinietas")
-    @ResponseWrapper(localName = "ultimasVinietasResponse", targetNamespace = "http://ws/", className = "ws.UltimasVinietasResponse")
-    @Action(input = "http://ws/ComicWS/ultimasVinietasRequest", output = "http://ws/ComicWS/ultimasVinietasResponse")
-    public List<Vinieta> ultimasVinietas();
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<ws.Serie>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "topFiveSeries", targetNamespace = "http://ws/", className = "ws.TopFiveSeries")
-    @ResponseWrapper(localName = "topFiveSeriesResponse", targetNamespace = "http://ws/", className = "ws.TopFiveSeriesResponse")
-    @Action(input = "http://ws/ComicWS/topFiveSeriesRequest", output = "http://ws/ComicWS/topFiveSeriesResponse")
-    public List<Serie> topFiveSeries();
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<java.lang.String>
-     */
-    @WebMethod
-    @WebResult(targetNamespace = "")
-    @RequestWrapper(localName = "findAutores", targetNamespace = "http://ws/", className = "ws.FindAutores")
-    @ResponseWrapper(localName = "findAutoresResponse", targetNamespace = "http://ws/", className = "ws.FindAutoresResponse")
-    @Action(input = "http://ws/ComicWS/findAutoresRequest", output = "http://ws/ComicWS/findAutoresResponse")
-    public List<String> findAutores();
-
-    /**
-     * 
-     * @param entity
-     */
-    @WebMethod
-    @Oneway
-    @RequestWrapper(localName = "createVinieta", targetNamespace = "http://ws/", className = "ws.CreateVinieta")
-    @Action(input = "http://ws/ComicWS/createVinieta")
-    public void createVinieta(
-        @WebParam(name = "entity", targetNamespace = "")
-        Vinieta entity);
-
-    /**
-     * 
-     * @param entity
-     */
-    @WebMethod
-    @Oneway
-    @RequestWrapper(localName = "createSerie", targetNamespace = "http://ws/", className = "ws.CreateSerie")
-    @Action(input = "http://ws/ComicWS/createSerie")
-    public void createSerie(
-        @WebParam(name = "entity", targetNamespace = "")
-        Serie entity);
 
 }

@@ -79,4 +79,8 @@ public class ComicService {
         port.removeVinieta(entity);
     }
 
+    public List<Vinieta> searchVinietasBySerie(Object id) {
+        return port.searchVinietaBySerie(id);
+    }
+
 }

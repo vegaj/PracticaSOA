@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for searchSerieByAutorResponse complex type.
+ * <p>Java class for searchSerieByNameResponse complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="searchSerieByAutorResponse">
+ * &lt;complexType name="searchSerieByNameResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}string" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://ws/}serie" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,13 +29,13 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "searchSerieByAutorResponse", propOrder = {
+@XmlType(name = "searchSerieByNameResponse", propOrder = {
     "_return"
 })
-public class SearchSerieByAutorResponse {
+public class SearchSerieByNameResponse {
 
     @XmlElement(name = "return")
-    protected List<String> _return;
+    protected List<Serie> _return;
 
     /**
      * Gets the value of the return property.
@@ -55,13 +55,13 @@ public class SearchSerieByAutorResponse {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link String }
+     * {@link Serie }
      * 
      * 
      */
-    public List<String> getReturn() {
+    public List<Serie> getReturn() {
         if (_return == null) {
-            _return = new ArrayList<String>();
+            _return = new ArrayList<Serie>();
         }
         return this._return;
     }

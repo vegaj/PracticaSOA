@@ -4,11 +4,11 @@
 <xsd:import namespace="http://ws/" schemaLocation="http://localhost:8080/ComicWS/ComicWS?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="findVinietasBetweenDates">
-<part name="parameters" element="tns:findVinietasBetweenDates"/>
+<message name="findVinietasByDate">
+<part name="parameters" element="tns:findVinietasByDate"/>
 </message>
-<message name="findVinietasBetweenDatesResponse">
-<part name="parameters" element="tns:findVinietasBetweenDatesResponse"/>
+<message name="findVinietasByDateResponse">
+<part name="parameters" element="tns:findVinietasByDateResponse"/>
 </message>
 <message name="searchSerieByAutor">
 <part name="parameters" element="tns:searchSerieByAutor"/>
@@ -16,11 +16,29 @@
 <message name="searchSerieByAutorResponse">
 <part name="parameters" element="tns:searchSerieByAutorResponse"/>
 </message>
+<message name="searchVinietaBySerie">
+<part name="parameters" element="tns:searchVinietaBySerie"/>
+</message>
+<message name="searchVinietaBySerieResponse">
+<part name="parameters" element="tns:searchVinietaBySerieResponse"/>
+</message>
 <message name="top5Vinietas">
 <part name="parameters" element="tns:top5Vinietas"/>
 </message>
 <message name="top5VinietasResponse">
 <part name="parameters" element="tns:top5VinietasResponse"/>
+</message>
+<message name="searchSerieByName">
+<part name="parameters" element="tns:searchSerieByName"/>
+</message>
+<message name="searchSerieByNameResponse">
+<part name="parameters" element="tns:searchSerieByNameResponse"/>
+</message>
+<message name="findVinietasBetweenDates">
+<part name="parameters" element="tns:findVinietasBetweenDates"/>
+</message>
+<message name="findVinietasBetweenDatesResponse">
+<part name="parameters" element="tns:findVinietasBetweenDatesResponse"/>
 </message>
 <message name="findRangeVinietas">
 <part name="parameters" element="tns:findRangeVinietas"/>
@@ -28,35 +46,17 @@
 <message name="findRangeVinietasResponse">
 <part name="parameters" element="tns:findRangeVinietasResponse"/>
 </message>
-<message name="findVinietasByDate">
-<part name="parameters" element="tns:findVinietasByDate"/>
+<message name="ultimasVinietas">
+<part name="parameters" element="tns:ultimasVinietas"/>
 </message>
-<message name="findVinietasByDateResponse">
-<part name="parameters" element="tns:findVinietasByDateResponse"/>
+<message name="ultimasVinietasResponse">
+<part name="parameters" element="tns:ultimasVinietasResponse"/>
 </message>
-<message name="countSeries">
-<part name="parameters" element="tns:countSeries"/>
+<message name="findAutores">
+<part name="parameters" element="tns:findAutores"/>
 </message>
-<message name="countSeriesResponse">
-<part name="parameters" element="tns:countSeriesResponse"/>
-</message>
-<message name="findRangeSeries">
-<part name="parameters" element="tns:findRangeSeries"/>
-</message>
-<message name="findRangeSeriesResponse">
-<part name="parameters" element="tns:findRangeSeriesResponse"/>
-</message>
-<message name="editVinieta">
-<part name="parameters" element="tns:editVinieta"/>
-</message>
-<message name="countVinietas">
-<part name="parameters" element="tns:countVinietas"/>
-</message>
-<message name="countVinietasResponse">
-<part name="parameters" element="tns:countVinietasResponse"/>
-</message>
-<message name="editSerie">
-<part name="parameters" element="tns:editSerie"/>
+<message name="findAutoresResponse">
+<part name="parameters" element="tns:findAutoresResponse"/>
 </message>
 <message name="findVinieta">
 <part name="parameters" element="tns:findVinieta"/>
@@ -64,11 +64,53 @@
 <message name="findVinietaResponse">
 <part name="parameters" element="tns:findVinietaResponse"/>
 </message>
-<message name="removeVinieta">
-<part name="parameters" element="tns:removeVinieta"/>
-</message>
 <message name="removeSerie">
 <part name="parameters" element="tns:removeSerie"/>
+</message>
+<message name="findRangeSeries">
+<part name="parameters" element="tns:findRangeSeries"/>
+</message>
+<message name="findRangeSeriesResponse">
+<part name="parameters" element="tns:findRangeSeriesResponse"/>
+</message>
+<message name="editSerie">
+<part name="parameters" element="tns:editSerie"/>
+</message>
+<message name="countSeries">
+<part name="parameters" element="tns:countSeries"/>
+</message>
+<message name="countSeriesResponse">
+<part name="parameters" element="tns:countSeriesResponse"/>
+</message>
+<message name="createVinieta">
+<part name="parameters" element="tns:createVinieta"/>
+</message>
+<message name="countVinietas">
+<part name="parameters" element="tns:countVinietas"/>
+</message>
+<message name="countVinietasResponse">
+<part name="parameters" element="tns:countVinietasResponse"/>
+</message>
+<message name="editVinieta">
+<part name="parameters" element="tns:editVinieta"/>
+</message>
+<message name="findAllVinietas">
+<part name="parameters" element="tns:findAllVinietas"/>
+</message>
+<message name="findAllVinietasResponse">
+<part name="parameters" element="tns:findAllVinietasResponse"/>
+</message>
+<message name="createSerie">
+<part name="parameters" element="tns:createSerie"/>
+</message>
+<message name="topFiveSeries">
+<part name="parameters" element="tns:topFiveSeries"/>
+</message>
+<message name="topFiveSeriesResponse">
+<part name="parameters" element="tns:topFiveSeriesResponse"/>
+</message>
+<message name="removeVinieta">
+<part name="parameters" element="tns:removeVinieta"/>
 </message>
 <message name="findSerie">
 <part name="parameters" element="tns:findSerie"/>
@@ -82,84 +124,84 @@
 <message name="findAllSeriesResponse">
 <part name="parameters" element="tns:findAllSeriesResponse"/>
 </message>
-<message name="findAllVinietas">
-<part name="parameters" element="tns:findAllVinietas"/>
-</message>
-<message name="findAllVinietasResponse">
-<part name="parameters" element="tns:findAllVinietasResponse"/>
-</message>
-<message name="ultimasVinietas">
-<part name="parameters" element="tns:ultimasVinietas"/>
-</message>
-<message name="ultimasVinietasResponse">
-<part name="parameters" element="tns:ultimasVinietasResponse"/>
-</message>
-<message name="topFiveSeries">
-<part name="parameters" element="tns:topFiveSeries"/>
-</message>
-<message name="topFiveSeriesResponse">
-<part name="parameters" element="tns:topFiveSeriesResponse"/>
-</message>
-<message name="findAutores">
-<part name="parameters" element="tns:findAutores"/>
-</message>
-<message name="findAutoresResponse">
-<part name="parameters" element="tns:findAutoresResponse"/>
-</message>
-<message name="createVinieta">
-<part name="parameters" element="tns:createVinieta"/>
-</message>
-<message name="createSerie">
-<part name="parameters" element="tns:createSerie"/>
-</message>
 <portType name="ComicWS">
-<operation name="findVinietasBetweenDates">
-<input wsam:Action="http://ws/ComicWS/findVinietasBetweenDatesRequest" message="tns:findVinietasBetweenDates"/>
-<output wsam:Action="http://ws/ComicWS/findVinietasBetweenDatesResponse" message="tns:findVinietasBetweenDatesResponse"/>
+<operation name="findVinietasByDate">
+<input wsam:Action="http://ws/ComicWS/findVinietasByDateRequest" message="tns:findVinietasByDate"/>
+<output wsam:Action="http://ws/ComicWS/findVinietasByDateResponse" message="tns:findVinietasByDateResponse"/>
 </operation>
 <operation name="searchSerieByAutor">
 <input wsam:Action="http://ws/ComicWS/searchSerieByAutorRequest" message="tns:searchSerieByAutor"/>
 <output wsam:Action="http://ws/ComicWS/searchSerieByAutorResponse" message="tns:searchSerieByAutorResponse"/>
 </operation>
+<operation name="searchVinietaBySerie">
+<input wsam:Action="http://ws/ComicWS/searchVinietaBySerieRequest" message="tns:searchVinietaBySerie"/>
+<output wsam:Action="http://ws/ComicWS/searchVinietaBySerieResponse" message="tns:searchVinietaBySerieResponse"/>
+</operation>
 <operation name="top5Vinietas">
 <input wsam:Action="http://ws/ComicWS/top5VinietasRequest" message="tns:top5Vinietas"/>
 <output wsam:Action="http://ws/ComicWS/top5VinietasResponse" message="tns:top5VinietasResponse"/>
+</operation>
+<operation name="searchSerieByName">
+<input wsam:Action="http://ws/ComicWS/searchSerieByNameRequest" message="tns:searchSerieByName"/>
+<output wsam:Action="http://ws/ComicWS/searchSerieByNameResponse" message="tns:searchSerieByNameResponse"/>
+</operation>
+<operation name="findVinietasBetweenDates">
+<input wsam:Action="http://ws/ComicWS/findVinietasBetweenDatesRequest" message="tns:findVinietasBetweenDates"/>
+<output wsam:Action="http://ws/ComicWS/findVinietasBetweenDatesResponse" message="tns:findVinietasBetweenDatesResponse"/>
 </operation>
 <operation name="findRangeVinietas">
 <input wsam:Action="http://ws/ComicWS/findRangeVinietasRequest" message="tns:findRangeVinietas"/>
 <output wsam:Action="http://ws/ComicWS/findRangeVinietasResponse" message="tns:findRangeVinietasResponse"/>
 </operation>
-<operation name="findVinietasByDate">
-<input wsam:Action="http://ws/ComicWS/findVinietasByDateRequest" message="tns:findVinietasByDate"/>
-<output wsam:Action="http://ws/ComicWS/findVinietasByDateResponse" message="tns:findVinietasByDateResponse"/>
+<operation name="ultimasVinietas">
+<input wsam:Action="http://ws/ComicWS/ultimasVinietasRequest" message="tns:ultimasVinietas"/>
+<output wsam:Action="http://ws/ComicWS/ultimasVinietasResponse" message="tns:ultimasVinietasResponse"/>
 </operation>
-<operation name="countSeries">
-<input wsam:Action="http://ws/ComicWS/countSeriesRequest" message="tns:countSeries"/>
-<output wsam:Action="http://ws/ComicWS/countSeriesResponse" message="tns:countSeriesResponse"/>
-</operation>
-<operation name="findRangeSeries">
-<input wsam:Action="http://ws/ComicWS/findRangeSeriesRequest" message="tns:findRangeSeries"/>
-<output wsam:Action="http://ws/ComicWS/findRangeSeriesResponse" message="tns:findRangeSeriesResponse"/>
-</operation>
-<operation name="editVinieta">
-<input wsam:Action="http://ws/ComicWS/editVinieta" message="tns:editVinieta"/>
-</operation>
-<operation name="countVinietas">
-<input wsam:Action="http://ws/ComicWS/countVinietasRequest" message="tns:countVinietas"/>
-<output wsam:Action="http://ws/ComicWS/countVinietasResponse" message="tns:countVinietasResponse"/>
-</operation>
-<operation name="editSerie">
-<input wsam:Action="http://ws/ComicWS/editSerie" message="tns:editSerie"/>
+<operation name="findAutores">
+<input wsam:Action="http://ws/ComicWS/findAutoresRequest" message="tns:findAutores"/>
+<output wsam:Action="http://ws/ComicWS/findAutoresResponse" message="tns:findAutoresResponse"/>
 </operation>
 <operation name="findVinieta">
 <input wsam:Action="http://ws/ComicWS/findVinietaRequest" message="tns:findVinieta"/>
 <output wsam:Action="http://ws/ComicWS/findVinietaResponse" message="tns:findVinietaResponse"/>
 </operation>
-<operation name="removeVinieta">
-<input wsam:Action="http://ws/ComicWS/removeVinieta" message="tns:removeVinieta"/>
-</operation>
 <operation name="removeSerie">
 <input wsam:Action="http://ws/ComicWS/removeSerie" message="tns:removeSerie"/>
+</operation>
+<operation name="findRangeSeries">
+<input wsam:Action="http://ws/ComicWS/findRangeSeriesRequest" message="tns:findRangeSeries"/>
+<output wsam:Action="http://ws/ComicWS/findRangeSeriesResponse" message="tns:findRangeSeriesResponse"/>
+</operation>
+<operation name="editSerie">
+<input wsam:Action="http://ws/ComicWS/editSerie" message="tns:editSerie"/>
+</operation>
+<operation name="countSeries">
+<input wsam:Action="http://ws/ComicWS/countSeriesRequest" message="tns:countSeries"/>
+<output wsam:Action="http://ws/ComicWS/countSeriesResponse" message="tns:countSeriesResponse"/>
+</operation>
+<operation name="createVinieta">
+<input wsam:Action="http://ws/ComicWS/createVinieta" message="tns:createVinieta"/>
+</operation>
+<operation name="countVinietas">
+<input wsam:Action="http://ws/ComicWS/countVinietasRequest" message="tns:countVinietas"/>
+<output wsam:Action="http://ws/ComicWS/countVinietasResponse" message="tns:countVinietasResponse"/>
+</operation>
+<operation name="editVinieta">
+<input wsam:Action="http://ws/ComicWS/editVinieta" message="tns:editVinieta"/>
+</operation>
+<operation name="findAllVinietas">
+<input wsam:Action="http://ws/ComicWS/findAllVinietasRequest" message="tns:findAllVinietas"/>
+<output wsam:Action="http://ws/ComicWS/findAllVinietasResponse" message="tns:findAllVinietasResponse"/>
+</operation>
+<operation name="createSerie">
+<input wsam:Action="http://ws/ComicWS/createSerie" message="tns:createSerie"/>
+</operation>
+<operation name="topFiveSeries">
+<input wsam:Action="http://ws/ComicWS/topFiveSeriesRequest" message="tns:topFiveSeries"/>
+<output wsam:Action="http://ws/ComicWS/topFiveSeriesResponse" message="tns:topFiveSeriesResponse"/>
+</operation>
+<operation name="removeVinieta">
+<input wsam:Action="http://ws/ComicWS/removeVinieta" message="tns:removeVinieta"/>
 </operation>
 <operation name="findSerie">
 <input wsam:Action="http://ws/ComicWS/findSerieRequest" message="tns:findSerie"/>
@@ -169,32 +211,10 @@
 <input wsam:Action="http://ws/ComicWS/findAllSeriesRequest" message="tns:findAllSeries"/>
 <output wsam:Action="http://ws/ComicWS/findAllSeriesResponse" message="tns:findAllSeriesResponse"/>
 </operation>
-<operation name="findAllVinietas">
-<input wsam:Action="http://ws/ComicWS/findAllVinietasRequest" message="tns:findAllVinietas"/>
-<output wsam:Action="http://ws/ComicWS/findAllVinietasResponse" message="tns:findAllVinietasResponse"/>
-</operation>
-<operation name="ultimasVinietas">
-<input wsam:Action="http://ws/ComicWS/ultimasVinietasRequest" message="tns:ultimasVinietas"/>
-<output wsam:Action="http://ws/ComicWS/ultimasVinietasResponse" message="tns:ultimasVinietasResponse"/>
-</operation>
-<operation name="topFiveSeries">
-<input wsam:Action="http://ws/ComicWS/topFiveSeriesRequest" message="tns:topFiveSeries"/>
-<output wsam:Action="http://ws/ComicWS/topFiveSeriesResponse" message="tns:topFiveSeriesResponse"/>
-</operation>
-<operation name="findAutores">
-<input wsam:Action="http://ws/ComicWS/findAutoresRequest" message="tns:findAutores"/>
-<output wsam:Action="http://ws/ComicWS/findAutoresResponse" message="tns:findAutoresResponse"/>
-</operation>
-<operation name="createVinieta">
-<input wsam:Action="http://ws/ComicWS/createVinieta" message="tns:createVinieta"/>
-</operation>
-<operation name="createSerie">
-<input wsam:Action="http://ws/ComicWS/createSerie" message="tns:createSerie"/>
-</operation>
 </portType>
 <binding name="ComicWSPortBinding" type="tns:ComicWS">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="findVinietasBetweenDates">
+<operation name="findVinietasByDate">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -212,7 +232,34 @@
 <soap:body use="literal"/>
 </output>
 </operation>
+<operation name="searchVinietaBySerie">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
 <operation name="top5Vinietas">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="searchSerieByName">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="findVinietasBetweenDates">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -230,7 +277,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="findVinietasByDate">
+<operation name="ultimasVinietas">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -239,7 +286,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="countSeries">
+<operation name="findAutores">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -247,23 +294,23 @@
 <output>
 <soap:body use="literal"/>
 </output>
+</operation>
+<operation name="findVinieta">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="removeSerie">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
 </operation>
 <operation name="findRangeSeries">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="editVinieta">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-</operation>
-<operation name="countVinietas">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -278,7 +325,52 @@
 <soap:body use="literal"/>
 </input>
 </operation>
-<operation name="findVinieta">
+<operation name="countSeries">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="createVinieta">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+</operation>
+<operation name="countVinietas">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="editVinieta">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+</operation>
+<operation name="findAllVinietas">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="createSerie">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+</operation>
+<operation name="topFiveSeries">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -288,12 +380,6 @@
 </output>
 </operation>
 <operation name="removeVinieta">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-</operation>
-<operation name="removeSerie">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -316,54 +402,6 @@
 <output>
 <soap:body use="literal"/>
 </output>
-</operation>
-<operation name="findAllVinietas">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="ultimasVinietas">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="topFiveSeries">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="findAutores">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="createVinieta">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-</operation>
-<operation name="createSerie">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
 </operation>
 </binding>
 <service name="ComicWS">

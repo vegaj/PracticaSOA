@@ -24,10 +24,12 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _SearchVinietaBySerie_QNAME = new QName("http://ws/", "searchVinietaBySerie");
     private final static QName _CreateSerie_QNAME = new QName("http://ws/", "createSerie");
     private final static QName _FindRangeVinietasResponse_QNAME = new QName("http://ws/", "findRangeVinietasResponse");
     private final static QName _EditSerie_QNAME = new QName("http://ws/", "editSerie");
     private final static QName _FindVinietaResponse_QNAME = new QName("http://ws/", "findVinietaResponse");
+    private final static QName _SearchSerieByName_QNAME = new QName("http://ws/", "searchSerieByName");
     private final static QName _Top5VinietasResponse_QNAME = new QName("http://ws/", "top5VinietasResponse");
     private final static QName _UltimasVinietas_QNAME = new QName("http://ws/", "ultimasVinietas");
     private final static QName _RemoveSerie_QNAME = new QName("http://ws/", "removeSerie");
@@ -37,11 +39,13 @@ public class ObjectFactory {
     private final static QName _FindAllSeries_QNAME = new QName("http://ws/", "findAllSeries");
     private final static QName _FindAllVinietas_QNAME = new QName("http://ws/", "findAllVinietas");
     private final static QName _FindAutores_QNAME = new QName("http://ws/", "findAutores");
+    private final static QName _SearchVinietaBySerieResponse_QNAME = new QName("http://ws/", "searchVinietaBySerieResponse");
     private final static QName _FindVinietasByDate_QNAME = new QName("http://ws/", "findVinietasByDate");
     private final static QName _Top5Vinietas_QNAME = new QName("http://ws/", "top5Vinietas");
     private final static QName _TopFiveSeries_QNAME = new QName("http://ws/", "topFiveSeries");
     private final static QName _CountVinietasResponse_QNAME = new QName("http://ws/", "countVinietasResponse");
     private final static QName _FindSerieResponse_QNAME = new QName("http://ws/", "findSerieResponse");
+    private final static QName _SearchSerieByNameResponse_QNAME = new QName("http://ws/", "searchSerieByNameResponse");
     private final static QName _UltimasVinietasResponse_QNAME = new QName("http://ws/", "ultimasVinietasResponse");
     private final static QName _CountSeriesResponse_QNAME = new QName("http://ws/", "countSeriesResponse");
     private final static QName _CountSeries_QNAME = new QName("http://ws/", "countSeries");
@@ -68,6 +72,14 @@ public class ObjectFactory {
      * 
      */
     public ObjectFactory() {
+    }
+
+    /**
+     * Create an instance of {@link SearchVinietaBySerie }
+     * 
+     */
+    public SearchVinietaBySerie createSearchVinietaBySerie() {
+        return new SearchVinietaBySerie();
     }
 
     /**
@@ -100,6 +112,14 @@ public class ObjectFactory {
      */
     public FindVinietaResponse createFindVinietaResponse() {
         return new FindVinietaResponse();
+    }
+
+    /**
+     * Create an instance of {@link SearchSerieByName }
+     * 
+     */
+    public SearchSerieByName createSearchSerieByName() {
+        return new SearchSerieByName();
     }
 
     /**
@@ -175,6 +195,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SearchVinietaBySerieResponse }
+     * 
+     */
+    public SearchVinietaBySerieResponse createSearchVinietaBySerieResponse() {
+        return new SearchVinietaBySerieResponse();
+    }
+
+    /**
      * Create an instance of {@link FindVinietasByDate }
      * 
      */
@@ -212,6 +240,14 @@ public class ObjectFactory {
      */
     public FindSerieResponse createFindSerieResponse() {
         return new FindSerieResponse();
+    }
+
+    /**
+     * Create an instance of {@link SearchSerieByNameResponse }
+     * 
+     */
+    public SearchSerieByNameResponse createSearchSerieByNameResponse() {
+        return new SearchSerieByNameResponse();
     }
 
     /**
@@ -375,6 +411,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SearchVinietaBySerie }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws/", name = "searchVinietaBySerie")
+    public JAXBElement<SearchVinietaBySerie> createSearchVinietaBySerie(SearchVinietaBySerie value) {
+        return new JAXBElement<SearchVinietaBySerie>(_SearchVinietaBySerie_QNAME, SearchVinietaBySerie.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link CreateSerie }{@code >}}
      * 
      */
@@ -408,6 +453,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://ws/", name = "findVinietaResponse")
     public JAXBElement<FindVinietaResponse> createFindVinietaResponse(FindVinietaResponse value) {
         return new JAXBElement<FindVinietaResponse>(_FindVinietaResponse_QNAME, FindVinietaResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SearchSerieByName }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws/", name = "searchSerieByName")
+    public JAXBElement<SearchSerieByName> createSearchSerieByName(SearchSerieByName value) {
+        return new JAXBElement<SearchSerieByName>(_SearchSerieByName_QNAME, SearchSerieByName.class, null, value);
     }
 
     /**
@@ -492,6 +546,15 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SearchVinietaBySerieResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws/", name = "searchVinietaBySerieResponse")
+    public JAXBElement<SearchVinietaBySerieResponse> createSearchVinietaBySerieResponse(SearchVinietaBySerieResponse value) {
+        return new JAXBElement<SearchVinietaBySerieResponse>(_SearchVinietaBySerieResponse_QNAME, SearchVinietaBySerieResponse.class, null, value);
+    }
+
+    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link FindVinietasByDate }{@code >}}
      * 
      */
@@ -534,6 +597,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://ws/", name = "findSerieResponse")
     public JAXBElement<FindSerieResponse> createFindSerieResponse(FindSerieResponse value) {
         return new JAXBElement<FindSerieResponse>(_FindSerieResponse_QNAME, FindSerieResponse.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link SearchSerieByNameResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://ws/", name = "searchSerieByNameResponse")
+    public JAXBElement<SearchSerieByNameResponse> createSearchSerieByNameResponse(SearchSerieByNameResponse value) {
+        return new JAXBElement<SearchSerieByNameResponse>(_SearchSerieByNameResponse_QNAME, SearchSerieByNameResponse.class, null, value);
     }
 
     /**

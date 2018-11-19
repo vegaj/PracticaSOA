@@ -25,12 +25,19 @@ import java.util.ResourceBundle;
 
 public class ComicStore implements Initializable {
 
-    public Button editVinieta;
-    public DatePicker selectedVFecha;
-    public ComboBox<Integer> selectedVPuntuacion;
-    public TextField selectedVNombre;
-    public TextField selectedVId;
-    public VBox editVinietaPanel;
+    //La anotacion @FXML conecta elementos de la vista cuya id es igual al nombre de la variable en el controlador
+    @FXML
+    private Button editVinieta;
+    @FXML
+    private DatePicker selectedVFecha;
+    @FXML
+    private ComboBox<Integer> selectedVPuntuacion;
+    @FXML
+    private TextField selectedVNombre;
+    @FXML
+    private TextField selectedVId;
+    @FXML
+    private VBox editVinietaPanel;
     @FXML
     private VBox editSeriePanel;
     @FXML
@@ -76,22 +83,30 @@ public class ComicStore implements Initializable {
 
     private ComicService comicService = ComicService.getInstance();
 
+    /**
+     * Funcion llamada al iniciar el servicio
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initializeView();
-        reloadSeries();
+        loadSeries(comicService.findAllSeries());
     }
 
-
+    /**
+     * Guardar nueva serie en el servicio web y actualizacion de la vista
+     */
     public void saveSerie(ActionEvent actionEvent) {
         Serie s = new Serie();
         s.setNombre(nombre.getText());
         s.setPuntuacion(puntuacion.getValue());
         s.setAutor(autor.getText());
         comicService.createSerie(s);
-        reloadSeries();
+        seriesTable.getItems().add(s);
     }
 
+    /**
+     * Modificar serie en servicio web y actualizacion de la vista
+     */
     public void editSerie(ActionEvent actionEvent) {
         Serie s = new Serie();
         s.setId(Integer.valueOf(selectedSerieID.getText()));
@@ -100,36 +115,51 @@ public class ComicStore implements Initializable {
         s.setAutor(selectedAutor.getText());
         comicService.editSerie(s);
         editSeriePanel.setVisible(false);
-        reloadSeries();
+        reloadSelectedSerie(s);
     }
 
+    /**
+     * Borrar serie en servicio web y actualizacion de la vista
+     */
     public void deleteSerie(ActionEvent actionEvent) {
         Serie s = comicService.findSerie(Integer.valueOf(selectedSerieID.getText()));
         comicService.removeSerie(s);
-        reloadSeries();
+        removeSelectedSerie();
         editSeriePanel.setVisible(false);
     }
 
+    /**
+     * Editar viñeta en servicio web y actualizacion de la vista
+     */
     public void editVinieta(ActionEvent actionEvent) throws DatatypeConfigurationException {
+
+        //Nueva viñeta con datos actualizados
         Vinieta v = comicService.findVinieta(Integer.valueOf(selectedVId.getText()));
         v.setNombre(selectedVNombre.getText());
         v.setPuntuacion(selectedVPuntuacion.getValue());
         GregorianCalendar c = new GregorianCalendar();
         c.setTime(Date.from(selectedVFecha.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
         v.setFecha(DatatypeFactory.newInstance().newXMLGregorianCalendar(c));
+        //Editar en servicio web
         comicService.editVinieta(v);
         editVinietaPanel.setVisible(false);
-        reloadVinietas();
-
+        reloadSelectedVinieta(v);
     }
 
+    /**
+     * Borrar viñeta en servicio web y actualizacion de la vista
+     */
     public void deleteVinieta(ActionEvent actionEvent) {
+        //Delete en servicio web
         Vinieta v = comicService.findVinieta(Integer.valueOf(selectedVId.getText()));
         comicService.removeVinieta(v);
         editVinietaPanel.setVisible(false);
-        reloadVinietas();
+        removeSelectedVinieta();
     }
 
+    /**
+     * Actualizacion del panel de editar serie
+     */
     private void updateSelectedSerie(Serie selected) {
         selectedSerieID.textProperty().set(selected.getId().toString());
         selectedSerieNombre.textProperty().set(selected.getNombre());
@@ -139,6 +169,9 @@ public class ComicStore implements Initializable {
     }
 
 
+    /**
+     * Actualizacion del panel de editar viñeta
+     */
     private void updateSelectedVinieta(Vinieta clickedRow) {
         selectedVId.textProperty().set(clickedRow.getId().toString());
         selectedVNombre.textProperty().set(clickedRow.getNombre());
@@ -147,37 +180,73 @@ public class ComicStore implements Initializable {
         editVinietaPanel.setVisible(true);
     }
 
-
-    private void reloadVinietas() {
-        loadVinietas(comicService.findSerie(Integer.valueOf(selectedSerieID.getText())));
+    /**
+     * Elimina una viñeta con datos antiguos y añade la viñeta actualizada en la tabla de viñetas
+     */
+    private void reloadSelectedVinieta(Vinieta v) {
+        removeSelectedVinieta();
+        vinietasTable.getItems().add(v);
     }
 
-    private void reloadSeries() {
-        loadSeries(comicService.findAllSeries());
+    /**
+     * Elimina la viñeta seleccionada en la tabla de viñetas
+     */
+    private void removeSelectedVinieta() {
+        Vinieta selectedItem = vinietasTable.getSelectionModel().getSelectedItem();
+        vinietasTable.getItems().remove(selectedItem);
     }
 
+
+    /**
+     * Elimina una serie con datos antiguos y añade la serie actualizada en la tabla de series
+     */
+    private void reloadSelectedSerie(Serie s) {
+        removeSelectedSerie();
+        seriesTable.getItems().add(s);
+    }
+
+    /**
+     * Elimina la serie seleccionada en la tabla de serie
+     */
+    private void removeSelectedSerie() {
+        Serie selectedItem = seriesTable.getSelectionModel().getSelectedItem();
+        seriesTable.getItems().remove(selectedItem);
+    }
+
+    /**
+     * Carga una lista de series en la tabla de series
+     */
     private void loadSeries(List<Serie> series) {
         seriesTable.getItems().setAll(series);
     }
 
+    /**
+     * Carga la lista de viñetas correspondientes a una serie en la tabla de viñetas
+     */
     private void loadVinietas(Serie serie) {
-        //TODO
-        vinietasTable.getItems().setAll(comicService.findAllVinietas());
+        vinietasTable.getItems().setAll(comicService.searchVinietasBySerie(serie));
     }
 
-    private void updateVinietas(Serie selected) {
+    /**
+     * Actualiza el label de la tabla de viñetas y carga las viñetas correspondientes
+     */
+    private void updateVinietasPanel(Serie selected) {
         currentSerieLabel.setText(selected.getNombre());
         loadVinietas(selected);
     }
 
+    /**
+     * Inicializa la vista, añade funcionalidades a los elementos de la vista
+     */
     private void initializeView() {
+        //Añade funcionalidad al hacer click en una fila
         seriesTable.setRowFactory(tr -> {
             TableRow<Serie> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (!row.isEmpty() && event.getButton() == MouseButton.PRIMARY) {
                     Serie clickedRow = row.getItem();
                     updateSelectedSerie(clickedRow);
-                    updateVinietas(clickedRow);
+                    updateVinietasPanel(clickedRow);
                 }
             });
             return row;
@@ -192,6 +261,8 @@ public class ComicStore implements Initializable {
             });
             return row;
         });
+
+        //Adaptador entre las entidades y las columnas de las tablas
         colSerieId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         colPuntuacion.setCellValueFactory(new PropertyValueFactory<>("puntuacion"));
