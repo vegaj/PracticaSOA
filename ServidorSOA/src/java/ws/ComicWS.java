@@ -76,8 +76,7 @@ public class ComicWS {
      */
     @WebMethod(operationName = "topFiveSeries")
     public List<Serie> topFiveSeries() {
-        //TODO write your implementation code here:
-        return null;
+        return serieFacade.topSeries(5);
     }
 
     /**
