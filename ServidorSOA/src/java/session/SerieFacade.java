@@ -70,4 +70,12 @@ public class SerieFacade extends AbstractFacade<Serie> {
         return result;
     }
     
+    public List<Serie> topSeries(int limit) {
+        if (limit < 0) limit = 5;
+        
+        TypedQuery tq =em.createQuery("SELECT s FROM Serie s ORDER By s.puntuacion DESC", Serie.class);
+        tq.setMaxResults(limit);
+        return tq.getResultList();
+     
+    }
 }
