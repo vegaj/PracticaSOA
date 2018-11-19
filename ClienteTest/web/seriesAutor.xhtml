@@ -15,23 +15,16 @@
     </h:head>
     <h:body>
         #{seriesBean.autorSeleccionado}
-        <br/>
+        <br/><br/>
         <h:form>
-            <h:dataTable value="#{seriesBean.series}" var="s">
+            <h:dataTable value="#{seriesBean.seriesAutor}" var="s">
                 <h:column>
                     <f:facet name="header">
-                        Nombre
+                        Nombre de la serie
                     </f:facet>
-                    #{s.nombre}
-                </h:column>            
-                <h:column>
-                    <f:facet name="header">
-                        Puntuación
-                    </f:facet>
-                    #{s.puntuacion}
-                </h:column>                                  
-            </h:dataTable>  <br/>
-            <h:outputText value="Total de series: "#{seriesBean.contar()}/>  <br/>          
+                    #{s}
+                </h:column>                                               
+            </h:dataTable> <br/><br/>                      
             <h:commandButton action="#{seriesBean.volver()}" value="Volver"/> 
         </h:form>
         <!-- BOOTSTRAP -->

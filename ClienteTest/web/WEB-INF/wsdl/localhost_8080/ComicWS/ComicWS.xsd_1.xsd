@@ -60,6 +60,14 @@
 
 <xs:element name="searchSerieByAutorResponse" type="tns:searchSerieByAutorResponse"/>
 
+<xs:element name="searchSerieByName" type="tns:searchSerieByName"/>
+
+<xs:element name="searchSerieByNameResponse" type="tns:searchSerieByNameResponse"/>
+
+<xs:element name="searchVinietaBySerie" type="tns:searchVinietaBySerie"/>
+
+<xs:element name="searchVinietaBySerieResponse" type="tns:searchVinietaBySerieResponse"/>
+
 <xs:element name="serie" type="tns:serie"/>
 
 <xs:element name="top5Vinietas" type="tns:top5Vinietas"/>
@@ -148,16 +156,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="findAutores">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="findAutoresResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="findAllVinietas">
 <xs:sequence/>
 </xs:complexType>
@@ -165,6 +163,16 @@
 <xs:complexType name="findAllVinietasResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:vinieta" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAutores">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="findAutoresResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -230,6 +238,18 @@
 </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="searchVinietaBySerie">
+<xs:sequence>
+<xs:element name="serie" type="xs:anyType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchVinietaBySerieResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:vinieta" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="editSerie">
 <xs:sequence>
 <xs:element name="entity" type="tns:serie" minOccurs="0"/>
@@ -249,6 +269,18 @@
 <xs:complexType name="ultimasVinietasResponse">
 <xs:sequence>
 <xs:element name="return" type="tns:vinieta" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchSerieByName">
+<xs:sequence>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchSerieByNameResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serie" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -282,7 +314,7 @@
 
 <xs:complexType name="searchSerieByAutorResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:serie" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 

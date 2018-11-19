@@ -19,8 +19,14 @@
             <h:commandButton action="#{seriesBean.actualizarTabla()}" value="Listar"/>
         </h:form>
         <br/><br/>
-        <h:form>
+        <h:form id="tabla">
             <h:dataTable id="tabla" value="#{seriesBean.series}" var="s">
+                <h:column>
+                    <f:facet name="header">
+                        Id
+                    </f:facet>
+                    #{s.id.toString()}
+                </h:column>
                 <h:column>
                     <f:facet name="header">
                         Nombre
@@ -47,6 +53,7 @@
                 </h:column>                        
             </h:dataTable> 
             <br/><br/>
+            <h:outputText value="Total de series: #{seriesBean.contar()}"/> <br/><br/>
             <h:commandButton action="#{seriesBean.volver()}" value="Volver"/> <br/>
         </h:form>
         <!-- BOOTSTRAP -->

@@ -22,7 +22,8 @@
                 <h:inputText value="#{seriesBean.vinieta.fecha}"/> <br/><br/>
                 <h:outputLabel value="Puntuacion: "/>
                 <h:inputText value="#{seriesBean.vinieta.puntuacion}"/> <br/><br/>
-                <!-- FALTA ASIGNAR LA VIÑETA A UNA SERIE -->
+                <h:outputLabel value="Serie: "/>
+                <h:inputText value="#{seriesBean.vinieta.idserie.nombre}"/> <br/><br/>
                 <h:commandButton action="#{seriesBean.crearVinieta()}" value="Crear" />
             </h:form>
         </f:view>
