@@ -15,7 +15,6 @@ import javax.jws.Oneway;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import jpa.Serie;
-import static jpa.Serie_.autor;
 import jpa.Vinieta;
 import session.SerieFacade;
 import session.VinietaFacade;
@@ -33,6 +32,115 @@ public class ComicWS {
     @EJB
     private VinietaFacade vinietaFacade;
 
+    /**
+     * Mejores series por puntuacion
+     * @return Hasta <i>5</i> series ordenadas de mejor a peor puntuación
+     */
+    @WebMethod(operationName = "topFiveSeries")
+    public List<Serie> topFiveSeries() {
+        return serieFacade.topSeries(5);
+    }
+
+    /**
+     * Buscar lista de nombres de series por autores no estricta.
+     * @param autor nombre de autor o término por el que buscar
+     * @return Lista con los nombres de las series que encajan con <i>author</i>
+     */
+    @WebMethod(operationName = "searchSerieByAutor")
+    public List<String> searchSerieByAutor(@WebParam(name = "autor") final String autor) {
+        return serieFacade.findByAutor(String.valueOf(autor));
+    }
+    
+    /**
+     * Buscar no estricta de serie por nombre
+     * @param nombre el nombre de la serie o término de búsqueda.
+     * @return una lista de las series que encajan con <i>name</i>.
+     */
+    @WebMethod(operationName = "searchSerieByName")
+    public List<Serie> searchSerieByName(@WebParam(name = "nombre") final String nombre) {
+        return serieFacade.searchSerieByName(String.valueOf(nombre));
+    }
+    
+
+    /**
+     * Web service operation
+     * @param date to search by format YYYY-MM-DD
+     * @return the list of vinietas with that date
+     * @throws IllegalArgumentException if the date can not be resolved.
+     */
+    @WebMethod(operationName = "findVinietasByDate")
+    public List<Vinieta> findVinietasByDate(@WebParam(name = "date") final String date) throws IllegalArgumentException {
+        Date d = Date.valueOf(date);
+        return vinietaFacade.findByDate(d);
+    }
+
+
+     /**
+     * Búsqueda entre rango de fechas
+     * El formato de fecha debe ser <b>YYYY-MM-DD</b>
+     * @param from Inicio del rango. Por defecto la menor fecha posible.
+     * @param to Fin del rango. Por defecto el mayor rango posible.
+     * @return La lista de Viñetas con fechas en ese rango.
+     */
+    @WebMethod(operationName = "findVinietasBetweenDates")
+    public List<Vinieta> findVinietasBetweenDates(@WebParam(name = "from") final String from, @WebParam(name = "to") final String to)
+            throws IllegalArgumentException{
+        Date start, end;
+        if(from == null) {
+            start = Date.valueOf(LocalDate.MIN);
+        } else {
+            start = Date.valueOf(from);
+        }
+        
+        if (to == null) {
+            end = Date.valueOf(LocalDate.MAX);
+        } else {
+            end = Date.valueOf(to);
+        }
+        
+        return vinietaFacade.findBetweenDates(start, end);
+    }
+    
+    /**
+     * Devuelve las mejores Viñetas
+     * @return hasta <i>5</i> Viñetas ordenadas de mejor a peor puntuación
+     */
+    @WebMethod(operationName = "top5Vinietas")
+    public List<Vinieta> top5VinietasPorPuntuacion() {
+        return vinietaFacade.topVinietas(5);
+    }
+    
+    /**
+     * Últimas viñetas
+     * @return Una lista con las <i>5</i> últimas Viñetas, de más nuevas a más antiguas.
+     */
+    @WebMethod(operationName = "ultimasVinietas")
+    public List<Vinieta> ultimasVinietas() {
+        return vinietaFacade.latestVinietas(10);
+    }
+   
+    /**
+     * Busca los nombre de los autores
+     * @return Una lista con todos los autores de series
+     */
+    @WebMethod(operationName = "findAutores")
+    public List<String> findAutores() {
+        return serieFacade.authors();
+    }
+    
+    /**
+     * Las Viñetas pertenecientes a una serie
+     * @param idSerie El identificador de la serie por la que buscar
+     * @return La lista de Viñetas asociadas a dicha serie
+     */
+    @WebMethod(operationName = "searchVinietaBySerie")
+    public List<Vinieta> searchVinietaBySerie(@WebParam(name = "serie") Object idSerie) throws IllegalArgumentException{
+        return vinietaFacade.findBySerie(idSerie);            
+    }
+       
+    /**
+     * AUTOGENERADOS
+     */
     @WebMethod(operationName = "createSerie")
     @Oneway
     public void createSerie(@WebParam(name = "entity") Serie entity) {
@@ -70,30 +178,8 @@ public class ComicWS {
     public int countSeries() {
         return serieFacade.count();
     }
-
-    /**
-     * Web service operation
-     */
-    @WebMethod(operationName = "topFiveSeries")
-    public List<Serie> topFiveSeries() {
-        return serieFacade.topSeries(5);
-    }
-
-    /**
-     * Web service operation
-     * Buscar las series de un autor en concreto
-     */
-    @WebMethod(operationName = "searchSerieByAutor")
-    public List<String> searchSerieByAutor(@WebParam(name = "autor") final String autor) {
-        return serieFacade.findByAutor(String.valueOf(autor));
-    }
     
-    @WebMethod(operationName = "searchSerieByName")
-    public List<Serie> searchSerieByName(@WebParam(name = "nombre") final String nombre) {
-        return serieFacade.searchSerieByName(String.valueOf(nombre));
-    }
-    
-    @WebMethod(operationName = "createVinieta")
+        @WebMethod(operationName = "createVinieta")
     @Oneway
     public void createVinieta(@WebParam(name = "entity") Vinieta entity) {
         vinietaFacade.create(entity);
@@ -131,78 +217,4 @@ public class ComicWS {
         return vinietaFacade.count();
     }
 
-    /**
-     * Web service operation
-     * @param date to search by format YYYY-MM-DD
-     * @return the list of vinietas with that date
-     * @throws IllegalArgumentException if the date can not be resolved.
-     */
-    @WebMethod(operationName = "findVinietasByDate")
-    public List<Vinieta> findVinietasByDate(@WebParam(name = "date") final String date) throws IllegalArgumentException {
-        Date d = Date.valueOf(date);
-        return vinietaFacade.findByDate(d);
-    }
-
-    /**
-     * Web service operation
-     * 
-     * Dates in format YYYY-MM-DD.
-     * @param from minimum date to show. If null, then the minimum will be used.
-     * @param to max date to show. If null, then the max will be used.
-     * @return the vinietas between those dates
-     * @throws IllegalArgumentException if a date is sent and can not be resolved.
-     */
-    @WebMethod(operationName = "findVinietasBetweenDates")
-    public List<Vinieta> findVinietasBetweenDates(@WebParam(name = "from") final String from, @WebParam(name = "to") final String to)
-            throws IllegalArgumentException{
-        Date start, end;
-        if(from == null) {
-            start = Date.valueOf(LocalDate.MIN);
-        } else {
-            start = Date.valueOf(from);
-        }
-        
-        if (to == null) {
-            end = Date.valueOf(LocalDate.MAX);
-        } else {
-            end = Date.valueOf(to);
-        }
-        
-        return vinietaFacade.findBetweenDates(start, end);
-    }
-    
-    /**
-     * @return the top 5 vinietas ordered by puntuacion in descendent order
-     */
-    @WebMethod(operationName = "top5Vinietas")
-    public List<Vinieta> top5VinietasPorPuntuacion() {
-        return vinietaFacade.topVinietas(5);
-    }
-
-    /**
-     * @return the latest 10 vinietas from newest to older
-     */
-    @WebMethod(operationName = "ultimasVinietas")
-    public List<Vinieta> ultimasVinietas() {
-        return vinietaFacade.latestVinietas(10);
-    }
-   
-    /**
-     * @return Athors from system. Not duplicated values.
-     */
-    @WebMethod(operationName = "findAutores")
-    public List<String> findAutores() {
-        return serieFacade.authors();
-    }
-    
-    /*
-    * searhVinietasBySerie(Integer idSerie)
-    * Método que relaciona las dos tablas Serie y Vinieta
-    * @return Listado de viñetas de una determinada serie con "idSerie"
-    */
-    @WebMethod(operationName = "searchVinietaBySerie")
-    public List<Vinieta> searchVinietaBySerie(@WebParam(name = "serie") Object idSerie) throws IllegalArgumentException{
-        return vinietaFacade.findBySerie(idSerie);            
-    }
-            
 }
