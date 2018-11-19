@@ -89,7 +89,7 @@ public class ComicStore implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         initializeView();
-        loadSeries(comicService.findAllSeries());
+        reloadSeries();
     }
 
     /**
@@ -101,7 +101,7 @@ public class ComicStore implements Initializable {
         s.setPuntuacion(puntuacion.getValue());
         s.setAutor(autor.getText());
         comicService.createSerie(s);
-        seriesTable.getItems().add(s);
+        reloadSeries();
     }
 
     /**
@@ -115,7 +115,7 @@ public class ComicStore implements Initializable {
         s.setAutor(selectedAutor.getText());
         comicService.editSerie(s);
         editSeriePanel.setVisible(false);
-        reloadSelectedSerie(s);
+        reloadSeries();
     }
 
     /**
@@ -124,7 +124,7 @@ public class ComicStore implements Initializable {
     public void deleteSerie(ActionEvent actionEvent) {
         Serie s = comicService.findSerie(Integer.valueOf(selectedSerieID.getText()));
         comicService.removeSerie(s);
-        removeSelectedSerie();
+        reloadSeries();
         editSeriePanel.setVisible(false);
     }
 
@@ -198,19 +198,10 @@ public class ComicStore implements Initializable {
 
 
     /**
-     * Elimina una serie con datos antiguos y añade la serie actualizada en la tabla de series
+     * Carga todas las series disponibles
      */
-    private void reloadSelectedSerie(Serie s) {
-        removeSelectedSerie();
-        seriesTable.getItems().add(s);
-    }
-
-    /**
-     * Elimina la serie seleccionada en la tabla de serie
-     */
-    private void removeSelectedSerie() {
-        Serie selectedItem = seriesTable.getSelectionModel().getSelectedItem();
-        seriesTable.getItems().remove(selectedItem);
+    private void reloadSeries() {
+        loadSeries(comicService.findAllSeries());
     }
 
     /**
