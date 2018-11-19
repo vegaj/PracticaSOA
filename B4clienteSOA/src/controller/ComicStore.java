@@ -18,10 +18,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ComicStore implements Initializable {
 
@@ -131,6 +128,9 @@ public class ComicStore implements Initializable {
         Serie s = comicService.findSerie(Integer.valueOf(selectedSerieID.getText()));
         comicService.removeSerie(s);
         reloadSeries();
+        vinietasTable.getItems().setAll(new ArrayList<>());
+        addVinietaPanel.setVisible(false);
+        editVinietaPanel.setVisible(false);
         editSeriePanel.setVisible(false);
     }
 
@@ -322,5 +322,13 @@ public class ComicStore implements Initializable {
 
     public void allSeries(ActionEvent actionEvent) {
         loadSeries(comicService.findAllSeries());
+    }
+
+    public void seriesByName(ActionEvent actionEvent) {
+        TextInputDialog dialog = new TextInputDialog("");
+        dialog.setTitle("Buscar serie por nombre");
+        dialog.setContentText("Introduzca nombre de serie:");
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(name -> loadSeries(comicService.searchSeriesByName(name)));
     }
 }

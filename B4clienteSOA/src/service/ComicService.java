@@ -90,4 +90,8 @@ public class ComicService {
     public List<Serie> topSeries() {
         return port.topFiveSeries();
     }
+
+    public List<Serie> searchSeriesByName(String name) {
+        return port.searchSerieByName(name);
+    }
 }

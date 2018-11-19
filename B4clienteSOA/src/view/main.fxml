@@ -27,6 +27,7 @@
         <MenuBar BorderPane.alignment="TOP_LEFT">
             <Menu mnemonicParsing="false" text="Consultas">
                 <MenuItem mnemonicParsing="false" onAction="#allSeries" text="Todas las series"/>
+                <MenuItem mnemonicParsing="false" onAction="#seriesByName" text="Buscar series por nombre"/>
                 <MenuItem mnemonicParsing="false" onAction="#topSeries" text="Top series"/>
                 <MenuItem mnemonicParsing="false" onAction="#topVinietas" text="Top viñetas"/>
             </Menu>
