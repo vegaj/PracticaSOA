@@ -242,7 +242,7 @@
     <right>
         <VBox alignment="TOP_RIGHT" prefHeight="571.0" prefWidth="492.0" BorderPane.alignment="CENTER">
             <HBox prefHeight="41.0" prefWidth="640.0">
-                <Label fx:id="currentSerieLabel" prefHeight="22.0" prefWidth="400.0" textOverrun="WORD_ELLIPSIS">
+                <Label fx:id="vinietaLabel" prefHeight="22.0" prefWidth="400.0" textOverrun="WORD_ELLIPSIS">
                     <font>
                         <Font size="22.0"/>
                     </font>

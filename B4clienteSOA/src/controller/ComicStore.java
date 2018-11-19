@@ -22,13 +22,20 @@ import java.util.*;
 
 public class ComicStore implements Initializable {
 
-    public VBox addVinietaPanel;
-    public TextField addVSerieId;
-    public DatePicker addVFecha;
-    public TextField addVNombre;
-    public ComboBox<Integer> addVPuntuacion;
-    public TabPane vTabPane;
+
     //La anotacion @FXML conecta elementos de la vista cuya id es igual al nombre de la variable en el controlador
+    @FXML
+    private VBox addVinietaPanel;
+    @FXML
+    private TextField addVSerieId;
+    @FXML
+    private DatePicker addVFecha;
+    @FXML
+    private TextField addVNombre;
+    @FXML
+    private ComboBox<Integer> addVPuntuacion;
+    @FXML
+    private TabPane vTabPane;
     @FXML
     private Button editVinieta;
     @FXML
@@ -58,7 +65,7 @@ public class ComicStore implements Initializable {
     @FXML
     private TableView<Serie> seriesTable;
     @FXML
-    private Label currentSerieLabel;
+    private Label vinietaLabel;
     @FXML
     private TextField nombre;
     @FXML
@@ -164,12 +171,6 @@ public class ComicStore implements Initializable {
         reloadSelectedVinieta(v);
     }
 
-    private static XMLGregorianCalendar extractDate(DatePicker datePicker) throws DatatypeConfigurationException {
-        GregorianCalendar c = new GregorianCalendar();
-        c.setTime(Date.from(datePicker.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-        return DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
-    }
-
     /**
      * Borrar viñeta en servicio web y actualizacion de la vista
      */
@@ -179,6 +180,41 @@ public class ComicStore implements Initializable {
         comicService.removeVinieta(v);
         editVinietaPanel.setVisible(false);
         removeSelectedVinieta();
+    }
+
+    /**
+     * Muestra el top de viñetas
+     */
+    public void topVinietas(ActionEvent actionEvent) {
+        vinietaLabel.setText("Top viñetas");
+        loadVinietas(comicService.topVinietas());
+    }
+
+    /**
+     * Muestra el top de series
+     */
+    public void topSeries(ActionEvent actionEvent) {
+        seriesLabel.setText("Top series");
+        loadSeries(comicService.topSeries());
+    }
+
+    /**
+     * Muestra todas las series
+     */
+    public void allSeries(ActionEvent actionEvent) {
+        seriesLabel.setText("Todas las series");
+        loadSeries(comicService.findAllSeries());
+    }
+
+    /**
+     * Pregunta al usuario por el nombre a buscar y muestra el resultado
+     */
+    public void seriesByName(ActionEvent actionEvent) {
+        TextInputDialog dialog = new TextInputDialog("");
+        dialog.setTitle("Buscar serie por nombre");
+        dialog.setContentText("Introduzca nombre de serie:");
+        Optional<String> result = dialog.showAndWait();
+        result.ifPresent(name -> loadSeries(comicService.searchSeriesByName(name)));
     }
 
     /**
@@ -221,7 +257,6 @@ public class ComicStore implements Initializable {
         vinietasTable.getItems().remove(selectedItem);
     }
 
-
     /**
      * Carga todas las series disponibles
      */
@@ -251,7 +286,7 @@ public class ComicStore implements Initializable {
      * Actualiza el label de la tabla de viñetas y carga las viñetas correspondientes
      */
     private void updateVinietasPanel(Serie selected) {
-        currentSerieLabel.setText(selected.getNombre());
+        vinietaLabel.setText(selected.getNombre());
         addVSerieId.textProperty().set(selected.getId().toString());
         addVinietaPanel.setVisible(true);
         vTabPane.getSelectionModel().select(0);
@@ -312,23 +347,9 @@ public class ComicStore implements Initializable {
         addVFecha.setValue(LocalDate.now());
     }
 
-    public void topVinietas(ActionEvent actionEvent) {
-        loadVinietas(comicService.topVinietas());
-    }
-
-    public void topSeries(ActionEvent actionEvent) {
-        loadSeries(comicService.topSeries());
-    }
-
-    public void allSeries(ActionEvent actionEvent) {
-        loadSeries(comicService.findAllSeries());
-    }
-
-    public void seriesByName(ActionEvent actionEvent) {
-        TextInputDialog dialog = new TextInputDialog("");
-        dialog.setTitle("Buscar serie por nombre");
-        dialog.setContentText("Introduzca nombre de serie:");
-        Optional<String> result = dialog.showAndWait();
-        result.ifPresent(name -> loadSeries(comicService.searchSeriesByName(name)));
+    private static XMLGregorianCalendar extractDate(DatePicker datePicker) throws DatatypeConfigurationException {
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(Date.from(datePicker.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+        return DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
     }
 }
