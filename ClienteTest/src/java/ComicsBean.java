@@ -20,13 +20,13 @@ import ws.Vinieta;
  */
 @Named(value = "seriesBean")
 @SessionScoped
-public class SeriesBean implements Serializable {
+public class ComicsBean implements Serializable {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/localhost_8080/ComicWS/ComicWS.wsdl")
     private ComicWS_Service service;
 
     /* VARIABLES SERIE */
-    private Serie serie;
+    private Serie serie; 
     private List<Serie> series;
     private List<String> seriesAutor;
     private Serie serieEditada;
@@ -37,7 +37,7 @@ public class SeriesBean implements Serializable {
     private List<Integer> rango; //rango de findRange
     private Integer min; //minimo del rango de findRange
     private Integer max; //maximo del rango de findRange
-    
+
     /* VARIABLES VINIETAS */
     private Vinieta vinieta;
     private Vinieta vinietaEditada;
@@ -55,7 +55,7 @@ public class SeriesBean implements Serializable {
     /**
      * Creates a new instance of SeriesBean
      */
-    public SeriesBean() {
+    public ComicsBean() {
     }
 
     @PostConstruct
@@ -240,7 +240,7 @@ public class SeriesBean implements Serializable {
     public void setIdBuscarV(Integer idBuscarV) {
         this.idBuscarV = idBuscarV;
     }
-    
+
     public List<String> getSeriesAutor() {
         return seriesAutor;
     }
@@ -248,9 +248,8 @@ public class SeriesBean implements Serializable {
     public void setSeriesAutor(List<String> seriesAutor) {
         this.seriesAutor = seriesAutor;
     }
-    
+
     /* METODOS PARA PROBAR LOS SERVICIOS */
-    
     public String nuevaSerie() {
         //redirige al formulario para introducir los datos de la serie
         return "nuevaSerie.xhtml";
@@ -271,81 +270,88 @@ public class SeriesBean implements Serializable {
     }
 
     public String editarSerie(Serie s) {
+        //le pasa la serie seleccionada para editarla
         serieEditada = s;
         return "editarSerie.xhtml";
     }
 
     public String guardar() {
+        //edita la serie seleccionada en la base de datos
         editSerie(serieEditada);
         return "index.xhtml";
     }
 
     public String mostrarSeries() {
+        //recoge el listado de series para mostrarlas
         series = findAllSeries();
         return "listadoSeries.xhtml";
     }
 
     public String volver() {
+        //vuelve a la pagina de index
         return "index.xhtml";
     }
 
     public String actualizarTabla() {
+        //recoge las cinco primeras series con mayor puntuacion
         series = topFiveSeries();
         return "listadoSeries.xhtml";
     }
 
     public String buscarAutor() {
+        //busca las series con el autor seleccionado
         seriesAutor = searchSerieByAutor(autorSeleccionado);
         return "seriesAutor.xhtml";
     }
 
     public Integer contar() {
+        //cuenta el numero de series total
         return countSeries();
     }
-    
-    public String buscarSeriePorId(){
+
+    public String buscarSeriePorId() {
         String res = null;
-        if(idBuscar > 0){
+        if (idBuscar > 0) {
             serieBuscada = findSerie(idBuscar);
-            if(serieBuscada != null){
+            if (serieBuscada != null) {
                 res = "mostrarSerieBuscada.xhtml";
-            }else{
+            } else {
                 res = "index.xhtml";
             }
-        }else{
+        } else {
             res = "index.xhtml";
         }
         return res;
     }
-    
-    public String buscarSerieRango(){
+
+    public String buscarSerieRango() {
         rango.add(min);
         rango.add(max);
         series = findRangeSeries(rango);
         return "listadoSeries.xhtml";
     }
-    
-    public String buscarVinietasEntreFechas(){
+
+    public String buscarVinietasEntreFechas() {
         vinietas = findVinietasBetweenDates(fechaMin, fechaMax);
         return "listadoVinietas.xhtml";
     }
-       
-    public String buscarVinietasByFecha(){
+
+    public String buscarVinietasByFecha() {
         vinietas = findVinietasByDate(fecha);
         return "listadoVinietas.xhtml";
     }
-    
-    public String nuevaVinieta(){
+
+    public String nuevaVinieta() {
         return "nuevaVinieta.xhtml";
     }
-    
-    public String crearVinieta(){
+
+    public String crearVinieta() {
         createVinieta(vinieta);
         vinieta = new Vinieta();
         return "index.xhtml";
     }
-    
-     public String editarVinieta(Vinieta v) {
+
+    public String editarVinieta(Vinieta v) {
         vinietaEditada = v;
         return "editarVinieta.xhtml";
     }
@@ -354,45 +360,45 @@ public class SeriesBean implements Serializable {
         editVinieta(vinietaEditada);
         return "index.xhtml";
     }
-    
-    public String buscarVinietaPorId(){
+
+    public String buscarVinietaPorId() {
         String res = null;
-        if(idBuscarV > 0){
+        if (idBuscarV > 0) {
             vinietaBuscada = findVinieta(idBuscarV);
-            if(vinietaBuscada != null){
+            if (vinietaBuscada != null) {
                 res = "mostrarVinietaBuscada.xhtml";
-            }else{
+            } else {
                 res = "index.xhtml";
             }
-        }else{
+        } else {
             res = "index.xhtml";
         }
         return res;
     }
-    
-    public String buscarVinietaRango(){
+
+    public String buscarVinietaRango() {
         rangoV.add(minV);
         rangoV.add(maxV);
         vinietas = findRangeVinietas(rangoV);
         return "listadoVinietas.xhtml";
     }
-    
-    public String mostrarVinieta(){
+
+    public String mostrarVinieta() {
         vinietas = findAllVinietas();
         return "listadoVinietas.xhtml";
     }
-    
-    public String borrarVinieta(Vinieta v){
+
+    public String borrarVinieta(Vinieta v) {
         removeVinieta(v);
         return "index.xhtml";
     }
-    
-    public String buscarVinietasBySerie(){
+
+    public String buscarVinietasBySerie() {        
+        searchVinietaBySerie(serieBuscaVin);
         return "mostrarVinietaBuscada.xhtml";
     }
 
     /* OPERACIONES DE LOS SERVICIOS */
-
     private int countSeries() {
         // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
         // If the calling of port operations may lead to race condition some synchronization is required.
@@ -552,6 +558,6 @@ public class SeriesBean implements Serializable {
         // If the calling of port operations may lead to race condition some synchronization is required.
         ws.ComicWS port = service.getComicWSPort();
         return port.ultimasVinietas();
-    }    
+    }
 
 }
