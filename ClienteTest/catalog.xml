@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/SeriesWS/SeriesWS?wsdl" uri="src/conf/xml-resources/web-service-references/SeriesWS/wsdl/localhost_8080/SeriesWS/SeriesWS.wsdl"/>
+    <system systemId="http://localhost:8080/SeriesWS/SeriesWS?xsd=1" uri="src/conf/xml-resources/web-service-references/SeriesWS/wsdl/localhost_8080/SeriesWS/SeriesWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ComicWS/ComicWS?wsdl" uri="src/conf/xml-resources/web-service-references/ComicWS/wsdl/localhost_8080/ComicWS/ComicWS.wsdl"/>
+    <system systemId="http://localhost:8080/ComicWS/ComicWS?xsd=1" uri="src/conf/xml-resources/web-service-references/ComicWS/wsdl/localhost_8080/ComicWS/ComicWS.xsd_1.xsd"/>
+</catalog>

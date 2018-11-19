@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Series</title>
+        <!-- BOOTSTRAP -->
+        <ui:define name="head-meta">
+            <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1.0 minimum-scale=1.0"/>
+        </ui:define>
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <!-- BOOTSTRAP -->
+    </h:head>
+    <h:body>
+        #{seriesBean.autorSeleccionado}
+        <br/>
+        <h:form>
+            <h:dataTable value="#{seriesBean.series}" var="s">
+                <h:column>
+                    <f:facet name="header">
+                        Nombre
+                    </f:facet>
+                    #{s.nombre}
+                </h:column>            
+                <h:column>
+                    <f:facet name="header">
+                        Puntuación
+                    </f:facet>
+                    #{s.puntuacion}
+                </h:column>                                  
+            </h:dataTable>  <br/>
+            <h:outputText value="Total de series: "#{seriesBean.contar()}/>  <br/>          
+            <h:commandButton action="#{seriesBean.volver()}" value="Volver"/> 
+        </h:form>
+        <!-- BOOTSTRAP -->
+        <script src="../js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="../js/jquery.js" type="text/javascript"></script>
+        <!-- BOOTSTRAP -->
+    </h:body>
+</html>
+

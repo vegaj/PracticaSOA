@@ -1,0 +1,298 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://ws/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://ws/">
+
+<xs:element name="countSeries" type="tns:countSeries"/>
+
+<xs:element name="countSeriesResponse" type="tns:countSeriesResponse"/>
+
+<xs:element name="countVinietas" type="tns:countVinietas"/>
+
+<xs:element name="countVinietasResponse" type="tns:countVinietasResponse"/>
+
+<xs:element name="createSerie" type="tns:createSerie"/>
+
+<xs:element name="createVinieta" type="tns:createVinieta"/>
+
+<xs:element name="editSerie" type="tns:editSerie"/>
+
+<xs:element name="editVinieta" type="tns:editVinieta"/>
+
+<xs:element name="findAllSeries" type="tns:findAllSeries"/>
+
+<xs:element name="findAllSeriesResponse" type="tns:findAllSeriesResponse"/>
+
+<xs:element name="findAllVinietas" type="tns:findAllVinietas"/>
+
+<xs:element name="findAllVinietasResponse" type="tns:findAllVinietasResponse"/>
+
+<xs:element name="findAutores" type="tns:findAutores"/>
+
+<xs:element name="findAutoresResponse" type="tns:findAutoresResponse"/>
+
+<xs:element name="findRangeSeries" type="tns:findRangeSeries"/>
+
+<xs:element name="findRangeSeriesResponse" type="tns:findRangeSeriesResponse"/>
+
+<xs:element name="findRangeVinietas" type="tns:findRangeVinietas"/>
+
+<xs:element name="findRangeVinietasResponse" type="tns:findRangeVinietasResponse"/>
+
+<xs:element name="findSerie" type="tns:findSerie"/>
+
+<xs:element name="findSerieResponse" type="tns:findSerieResponse"/>
+
+<xs:element name="findVinieta" type="tns:findVinieta"/>
+
+<xs:element name="findVinietaResponse" type="tns:findVinietaResponse"/>
+
+<xs:element name="findVinietasBetweenDates" type="tns:findVinietasBetweenDates"/>
+
+<xs:element name="findVinietasBetweenDatesResponse" type="tns:findVinietasBetweenDatesResponse"/>
+
+<xs:element name="findVinietasByDate" type="tns:findVinietasByDate"/>
+
+<xs:element name="findVinietasByDateResponse" type="tns:findVinietasByDateResponse"/>
+
+<xs:element name="removeSerie" type="tns:removeSerie"/>
+
+<xs:element name="removeVinieta" type="tns:removeVinieta"/>
+
+<xs:element name="searchSerieByAutor" type="tns:searchSerieByAutor"/>
+
+<xs:element name="searchSerieByAutorResponse" type="tns:searchSerieByAutorResponse"/>
+
+<xs:element name="serie" type="tns:serie"/>
+
+<xs:element name="top5Vinietas" type="tns:top5Vinietas"/>
+
+<xs:element name="top5VinietasResponse" type="tns:top5VinietasResponse"/>
+
+<xs:element name="topFiveSeries" type="tns:topFiveSeries"/>
+
+<xs:element name="topFiveSeriesResponse" type="tns:topFiveSeriesResponse"/>
+
+<xs:element name="ultimasVinietas" type="tns:ultimasVinietas"/>
+
+<xs:element name="ultimasVinietasResponse" type="tns:ultimasVinietasResponse"/>
+
+<xs:element name="vinieta" type="tns:vinieta"/>
+
+<xs:complexType name="findSerie">
+<xs:sequence>
+<xs:element name="id" type="xs:anyType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findSerieResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serie" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="serie">
+<xs:sequence>
+<xs:element name="autor" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="puntuacion" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAllSeries">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="findAllSeriesResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serie" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="editVinieta">
+<xs:sequence>
+<xs:element name="entity" type="tns:vinieta" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="vinieta">
+<xs:sequence>
+<xs:element name="fecha" type="xs:dateTime" minOccurs="0"/>
+<xs:element name="id" type="xs:int" minOccurs="0"/>
+<xs:element name="idserie" type="tns:serie" minOccurs="0"/>
+<xs:element name="nombre" type="xs:string" minOccurs="0"/>
+<xs:element name="puntuacion" type="xs:int" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findVinieta">
+<xs:sequence>
+<xs:element name="id" type="xs:anyType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findVinietaResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:vinieta" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findVinietasBetweenDates">
+<xs:sequence>
+<xs:element name="from" type="xs:string" minOccurs="0"/>
+<xs:element name="to" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findVinietasBetweenDatesResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:vinieta" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAutores">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="findAutoresResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAllVinietas">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="findAllVinietasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:vinieta" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="countVinietas">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="countVinietasResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findRangeVinietas">
+<xs:sequence>
+<xs:element name="range" type="xs:int" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findRangeVinietasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:vinieta" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findVinietasByDate">
+<xs:sequence>
+<xs:element name="date" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findVinietasByDateResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:vinieta" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createVinieta">
+<xs:sequence>
+<xs:element name="entity" type="tns:vinieta" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findRangeSeries">
+<xs:sequence>
+<xs:element name="range" type="xs:int" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findRangeSeriesResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serie" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="topFiveSeries">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="topFiveSeriesResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serie" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="editSerie">
+<xs:sequence>
+<xs:element name="entity" type="tns:serie" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="createSerie">
+<xs:sequence>
+<xs:element name="entity" type="tns:serie" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="ultimasVinietas">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="ultimasVinietasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:vinieta" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="removeSerie">
+<xs:sequence>
+<xs:element name="entity" type="tns:serie" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="removeVinieta">
+<xs:sequence>
+<xs:element name="entity" type="tns:vinieta" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="countSeries">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="countSeriesResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchSerieByAutor">
+<xs:sequence>
+<xs:element name="autor" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchSerieByAutorResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:serie" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="top5Vinietas">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="top5VinietasResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:vinieta" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
