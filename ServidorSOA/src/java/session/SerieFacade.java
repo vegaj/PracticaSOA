@@ -49,12 +49,11 @@ public class SerieFacade extends AbstractFacade<Serie> {
         if(name == null){
             throw new RuntimeException("Null name");
         }
-        List<Serie> result;
-        
-        TypedQuery tq = em.createQuery("SELECT s FROM Serie S WHERE s.nombre = :name", Serie.class);
+
+        name = '%' + name + '%';
+        TypedQuery tq = em.createQuery("SELECT s FROM Serie S WHERE s.nombre LIKE :name", Serie.class);
         tq.setParameter("name", name);
-        result = tq.getResultList();
-        return result;        
+        return tq.getResultList();
     }
     
     /**
