@@ -83,4 +83,11 @@ public class ComicService {
         return port.searchVinietaBySerie(id);
     }
 
+    public List<Vinieta> topVinietas() {
+        return port.top5Vinietas();
+    }
+
+    public List<Serie> topSeries() {
+        return port.topFiveSeries();
+    }
 }

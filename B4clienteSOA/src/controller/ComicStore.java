@@ -25,6 +25,12 @@ import java.util.ResourceBundle;
 
 public class ComicStore implements Initializable {
 
+    public VBox addVinietaPanel;
+    public TextField addVSerieId;
+    public DatePicker addVFecha;
+    public TextField addVNombre;
+    public ComboBox<Integer> addVPuntuacion;
+    public TabPane vTabPane;
     //La anotacion @FXML conecta elementos de la vista cuya id es igual al nombre de la variable en el controlador
     @FXML
     private Button editVinieta;
@@ -95,7 +101,7 @@ public class ComicStore implements Initializable {
     /**
      * Guardar nueva serie en el servicio web y actualizacion de la vista
      */
-    public void saveSerie(ActionEvent actionEvent) {
+    public void addSerie(ActionEvent actionEvent) {
         Serie s = new Serie();
         s.setNombre(nombre.getText());
         s.setPuntuacion(puntuacion.getValue());
@@ -129,6 +135,20 @@ public class ComicStore implements Initializable {
     }
 
     /**
+     * Añadir viñeta en servicio web y actualizacion de la vista
+     */
+    public void addVinieta(ActionEvent actionEvent) throws DatatypeConfigurationException {
+        Serie s = comicService.findSerie((Integer.valueOf(addVSerieId.getText())));
+        Vinieta v = new Vinieta();
+        v.setIdserie(s);
+        v.setNombre(addVNombre.getText());
+        v.setPuntuacion(addVPuntuacion.getValue());
+        v.setFecha(extractDate(addVFecha));
+        comicService.createVinieta(v);
+        loadVinietasFromSerie(s);
+    }
+
+    /**
      * Editar viñeta en servicio web y actualizacion de la vista
      */
     public void editVinieta(ActionEvent actionEvent) throws DatatypeConfigurationException {
@@ -137,13 +157,17 @@ public class ComicStore implements Initializable {
         Vinieta v = comicService.findVinieta(Integer.valueOf(selectedVId.getText()));
         v.setNombre(selectedVNombre.getText());
         v.setPuntuacion(selectedVPuntuacion.getValue());
-        GregorianCalendar c = new GregorianCalendar();
-        c.setTime(Date.from(selectedVFecha.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
-        v.setFecha(DatatypeFactory.newInstance().newXMLGregorianCalendar(c));
+        v.setFecha(extractDate(selectedVFecha));
         //Editar en servicio web
         comicService.editVinieta(v);
         editVinietaPanel.setVisible(false);
         reloadSelectedVinieta(v);
+    }
+
+    private static XMLGregorianCalendar extractDate(DatePicker datePicker) throws DatatypeConfigurationException {
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(Date.from(datePicker.getValue().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+        return DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
     }
 
     /**
@@ -177,6 +201,7 @@ public class ComicStore implements Initializable {
         selectedVNombre.textProperty().set(clickedRow.getNombre());
         selectedVPuntuacion.getSelectionModel().select(clickedRow.getPuntuacion());
         selectedVFecha.setValue(LocalDate.of(clickedRow.getFecha().getYear(), clickedRow.getFecha().getMonth(), clickedRow.getFecha().getDay()));
+        vTabPane.getSelectionModel().select(1);
         editVinietaPanel.setVisible(true);
     }
 
@@ -214,8 +239,12 @@ public class ComicStore implements Initializable {
     /**
      * Carga la lista de viñetas correspondientes a una serie en la tabla de viñetas
      */
-    private void loadVinietas(Serie serie) {
-        vinietasTable.getItems().setAll(comicService.searchVinietasBySerie(serie));
+    private void loadVinietasFromSerie(Serie serie) {
+        loadVinietas(comicService.searchVinietasBySerie(serie));
+    }
+
+    private void loadVinietas(List<Vinieta> vinietas) {
+        vinietasTable.getItems().setAll(vinietas);
     }
 
     /**
@@ -223,7 +252,10 @@ public class ComicStore implements Initializable {
      */
     private void updateVinietasPanel(Serie selected) {
         currentSerieLabel.setText(selected.getNombre());
-        loadVinietas(selected);
+        addVSerieId.textProperty().set(selected.getId().toString());
+        addVinietaPanel.setVisible(true);
+        vTabPane.getSelectionModel().select(0);
+        loadVinietasFromSerie(selected);
     }
 
     /**
@@ -276,6 +308,19 @@ public class ComicStore implements Initializable {
             }
         }));
         puntuacion.getSelectionModel().select(1);
+        addVPuntuacion.getSelectionModel().select(1);
+        addVFecha.setValue(LocalDate.now());
     }
 
+    public void topVinietas(ActionEvent actionEvent) {
+        loadVinietas(comicService.topVinietas());
+    }
+
+    public void topSeries(ActionEvent actionEvent) {
+        loadSeries(comicService.topSeries());
+    }
+
+    public void allSeries(ActionEvent actionEvent) {
+        loadSeries(comicService.findAllSeries());
+    }
 }
